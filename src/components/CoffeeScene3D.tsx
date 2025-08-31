@@ -1,57 +1,184 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useMemo } from 'react';
 import { Canvas, useFrame, useLoader } from '@react-three/fiber';
-import { OrbitControls, useGLTF, Text3D, Float } from '@react-three/drei';
+import { OrbitControls, Float, Sparkles, Environment, Lightformer } from '@react-three/drei';
 import * as THREE from 'three';
 
-// Simple 3D Coffee Cup Component
-function CoffeeCup() {
-  const meshRef = useRef<THREE.Group>(null!);
+// Realistic 3D Coffee Cup Component
+function RealisticCoffeeCup() {
+  const groupRef = useRef<THREE.Group>(null!);
+  const steamRef = useRef<THREE.Group>(null!);
   const [hovered, setHovered] = useState(false);
   
   useFrame((state) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.y += 0.005;
-      meshRef.current.position.y = Math.sin(state.clock.elapsedTime) * 0.1;
+    const time = state.clock.elapsedTime;
+    if (groupRef.current) {
+      groupRef.current.rotation.y += 0.003;
+      groupRef.current.position.y = Math.sin(time * 0.5) * 0.05;
+    }
+    
+    // Animate steam particles
+    if (steamRef.current) {
+      steamRef.current.children.forEach((child, i) => {
+        const mesh = child as THREE.Mesh;
+        mesh.position.y = 0.8 + i * 0.15 + Math.sin(time * 2 + i) * 0.1;
+        mesh.position.x = Math.sin(time + i * 0.5) * 0.1;
+        mesh.position.z = Math.cos(time + i * 0.5) * 0.1;
+        mesh.rotation.z = time * 0.5 + i;
+      });
     }
   });
 
+  // Create realistic cup geometry
+  const cupGeometry = useMemo(() => {
+    const shape = new THREE.Shape();
+    
+    // Create cup profile with curve
+    const points = [];
+    for (let i = 0; i <= 20; i++) {
+      const angle = (i / 20) * Math.PI * 2;
+      const radius = 0.6 + Math.sin(angle * 2) * 0.05; // Slight curve
+      points.push(new THREE.Vector2(radius, -0.6 + (i / 20) * 1.2));
+    }
+    
+    const geometry = new THREE.LatheGeometry(points, 32);
+    return geometry;
+  }, []);
+
+  // Realistic materials
+  const cupMaterial = new THREE.MeshPhysicalMaterial({
+    color: '#f8f6f0',
+    roughness: 0.2,
+    metalness: 0.1,
+    clearcoat: 0.8,
+    clearcoatRoughness: 0.2,
+  });
+
+  const coffeeMaterial = new THREE.MeshPhysicalMaterial({
+    color: '#2d1810',
+    roughness: 0.1,
+    metalness: 0.3,
+    reflectivity: 0.8,
+  });
+
+  const handleMaterial = new THREE.MeshPhysicalMaterial({
+    color: '#f8f6f0',
+    roughness: 0.3,
+    metalness: 0.1,
+    clearcoat: 0.6,
+  });
+
+  // Create handle geometry
+  const handleGeometry = useMemo(() => {
+    const curve = new THREE.EllipseCurve(
+      0, 0,
+      0.35, 0.4,
+      0, Math.PI * 1.5,
+      false,
+      0
+    );
+    const points = curve.getPoints(32);
+    const geometry = new THREE.TubeGeometry(
+      new THREE.CatmullRomCurve3(points.map(p => new THREE.Vector3(p.x, p.y, 0))),
+      32,
+      0.03,
+      8,
+      false
+    );
+    return geometry;
+  }, []);
+
   return (
-    <Float speed={2} rotationIntensity={0.1} floatIntensity={0.2}>
+    <Float speed={1.5} rotationIntensity={0.05} floatIntensity={0.1}>
       <group
-        ref={meshRef}
+        ref={groupRef}
         onPointerOver={() => setHovered(true)}
         onPointerOut={() => setHovered(false)}
-        scale={hovered ? 1.1 : 1}
+        scale={hovered ? 1.05 : 1}
       >
-        {/* Coffee Cup Body */}
-        <mesh position={[0, -0.5, 0]}>
-          <cylinderGeometry args={[0.8, 0.6, 1.2, 32]} />
-          <meshStandardMaterial color="#f5f5dc" roughness={0.1} />
+        {/* Main cup body */}
+        <mesh position={[0, -0.3, 0]} geometry={cupGeometry} material={cupMaterial} castShadow />
+        
+        {/* Coffee liquid surface with foam pattern */}
+        <mesh position={[0, 0.3, 0]}>
+          <cylinderGeometry args={[0.55, 0.55, 0.02, 64]} />
+          <primitive object={coffeeMaterial} attach="material" />
         </mesh>
         
-        {/* Coffee Liquid */}
-        <mesh position={[0, 0.1, 0]}>
-          <cylinderGeometry args={[0.75, 0.75, 0.1, 32]} />
-          <meshStandardMaterial color="#8B4513" roughness={0.2} />
+        {/* Latte art foam */}
+        <mesh position={[0, 0.31, 0]}>
+          <cylinderGeometry args={[0.4, 0.4, 0.01, 32]} />
+          <meshStandardMaterial 
+            color="#f4f1e8" 
+            roughness={0.8}
+            transparent
+            opacity={0.9}
+          />
         </mesh>
         
-        {/* Cup Handle */}
-        <mesh position={[0.9, -0.3, 0]} rotation={[0, 0, Math.PI / 2]}>
-          <torusGeometry args={[0.3, 0.05, 8, 16]} />
-          <meshStandardMaterial color="#f5f5dc" roughness={0.1} />
+        {/* Coffee cup handle */}
+        <mesh 
+          position={[0.7, -0.1, 0]} 
+          rotation={[Math.PI / 2, 0, 0]}
+          geometry={handleGeometry}
+          material={handleMaterial}
+          castShadow
+        />
+        
+        {/* Saucer */}
+        <mesh position={[0, -0.95, 0]}>
+          <cylinderGeometry args={[1.1, 1.1, 0.05, 64]} />
+          <primitive object={cupMaterial} attach="material" />
         </mesh>
         
-        {/* Steam Particles */}
-        {[...Array(5)].map((_, i) => (
-          <mesh key={i} position={[Math.sin(i) * 0.2, 0.8 + i * 0.2, Math.cos(i) * 0.2]}>
-            <sphereGeometry args={[0.02, 8, 8]} />
+        {/* Realistic steam effect */}
+        <group ref={steamRef}>
+          {[...Array(12)].map((_, i) => (
+            <mesh key={i} position={[
+              Math.sin(i * 0.5) * 0.15, 
+              0.8 + i * 0.15, 
+              Math.cos(i * 0.5) * 0.15
+            ]}>
+              <sphereGeometry args={[0.015 + Math.random() * 0.01, 8, 8]} />
+              <meshStandardMaterial 
+                color="white" 
+                transparent 
+                opacity={0.7 - i * 0.05}
+                emissive="#ffffff"
+                emissiveIntensity={0.1}
+              />
+            </mesh>
+          ))}
+        </group>
+        
+        {/* Coffee beans around the cup */}
+        {[...Array(8)].map((_, i) => (
+          <mesh 
+            key={i} 
+            position={[
+              Math.cos((i / 8) * Math.PI * 2) * 1.5,
+              -0.9 + Math.random() * 0.1,
+              Math.sin((i / 8) * Math.PI * 2) * 1.5
+            ]}
+            rotation={[Math.random(), Math.random(), Math.random()]}
+          >
+            <sphereGeometry args={[0.08, 16, 12]} />
             <meshStandardMaterial 
-              color="white" 
-              transparent 
-              opacity={0.6 - i * 0.1}
+              color="#3c2414" 
+              roughness={0.9}
+              metalness={0.1}
             />
           </mesh>
         ))}
+        
+        {/* Sparkle effects */}
+        <Sparkles 
+          count={50}
+          scale={3}
+          size={2}
+          speed={0.3}
+          opacity={0.6}
+          color="#ffd700"
+        />
       </group>
     </Float>
   );
@@ -95,7 +222,7 @@ const CoffeeScene3D = () => {
         <pointLight position={[-5, 5, 5]} intensity={0.5} color="#fff5ee" />
         
         {/* Main Coffee Cup */}
-        <CoffeeCup />
+        <RealisticCoffeeCup />
         
         {/* Scattered Coffee Beans */}
         <CoffeeBean position={[-2, -1, 1]} />
