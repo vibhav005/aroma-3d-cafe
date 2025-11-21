@@ -21,6 +21,9 @@ import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import { Reservation } from "@/types";
 import { businessInfo } from "@/data/mockData";
+import CafeMapGL from "./CafeMapGl";
+import CafeMap3D from "./CafeMapGl";
+import CafeMapPro from "./CafeMapGl";
 
 const GAS_URL = import.meta.env.VITE_GAS_RESERVATIONS_URL as string | undefined;
 
@@ -565,36 +568,18 @@ const Reservations = () => {
             </Card>
 
             <Card className="border border-coffee-rich/15 bg-white/70 backdrop-blur-xl shadow-[0_20px_40px_rgba(136,107,71,0.12)]">
-              <CardContent className="p-0">
-                <div className="relative h-64 rounded-xl overflow-hidden">
-                  {/* Map placeholder */}
-                  <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(203,213,225,0.25),rgba(148,163,184,0.15))]" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-center">
-                      <MapPin className="w-8 h-8 text-sage mx-auto mb-2" />
-                      <p className="text-coffee-medium">Interactive Map</p>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="mt-3 border-sage text-sage hover:bg-sage hover:text-white"
-                        onClick={() =>
-                          window.open(
-                            "https://share.google/C8AGmIBgCsrXt5wkh",
-                            "_blank",
-                            "noopener,noreferrer"
-                          )
-                        }
-                      >
-                        <ExternalLink className="w-4 h-4 mr-2" />
-                        Open in Maps
-                      </Button>
-                    </div>
-                  </div>
-                  {/* coffee-tint overlay */}
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-coffee-medium/15 to-transparent" />
-                </div>
-              </CardContent>
-            </Card>
+  <CardContent className="p-0">
+    <CafeMapPro
+      coords={{ lat: businessInfo.coordinates.lat, lng: businessInfo.coordinates.lng }}
+      cafeName="Deccan Brews"
+      addressLine={`${businessInfo.address.street}, ${businessInfo.address.city}, ${businessInfo.address.state} ${businessInfo.address.zip}`}
+      phone="+91 7387833732"
+      mapsUrl="https://share.google/fx4jsIy3qc0Advkl3"
+      deliveryRadiusMeters={4000}
+      className="h-64 md:h-72 rounded-xl overflow-hidden"
+    />
+  </CardContent>
+</Card>
           </motion.div>
         </div>
       </div>

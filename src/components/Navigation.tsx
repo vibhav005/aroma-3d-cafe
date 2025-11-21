@@ -16,7 +16,6 @@ const Navigation = () => {
     { name: "About", href: "#about" },
     { name: "Gallery", href: "#gallery" },
     { name: "Reservations", href: "#reservations" },
-    { name: "Contact", href: "#contact" },
   ];
 
   // Header shrink + scroll progress

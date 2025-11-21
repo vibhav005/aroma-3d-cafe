@@ -1,20 +1,20 @@
 import {  BusinessInfo } from '@/types';
 
 export const businessInfo: BusinessInfo = {
-  name: 'Artisan Coffee Co.',
+  name: 'Deccan Brews Cafe',
   address: {
-    street: '123 Coffee Street',
-    city: 'Portland',
-    state: 'OR',
-    zip: '97201',
-    country: 'United States'
+    street: 'Shop 15/16/17, ABC Rutuja Elegancet',
+    city: 'Pune',
+    state: 'MH',
+    zip: '411033',
+    country: 'India'
   },
   coordinates: {
-    lat: 45.5152,
-    lng: -122.6784
+    lat: 18.646394673962618,
+    lng: 73.76849812209049
   },
-  phone: '+1 (503) 555-CAFE',
-  email: 'hello@artisancoffee.co',
+  phone: '+91 7387833732',
+  email: 'cafedeccanbrews@gmail.com',
   hours: {
     monday: { open: '7:00', close: '19:00' },
     tuesday: { open: '7:00', close: '19:00' },
@@ -25,9 +25,7 @@ export const businessInfo: BusinessInfo = {
     sunday: { open: '8:00', close: '18:00' }
   },
   socialMedia: {
-    instagram: 'https://instagram.com/artisancoffeeco',
-    facebook: 'https://facebook.com/artisancoffeeco',
-    twitter: 'https://twitter.com/artisancoffeeco'
+    instagram: 'https://www.instagram.com/deccanbrewscafe/?hl=en',
   }
 };
 
