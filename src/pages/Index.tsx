@@ -5,6 +5,8 @@ import AboutSection from '@/components/AboutSection';
 import GallerySection from '@/components/GallerySection';
 import ContactSection from '@/components/ContactSection';
 import FloatingCTA from '@/components/FloatingCTA';
+import Testimonials from '@/components/Testimonials';
+import Reservations from '@/components/Reservations';
 
 const Index = () => {
   return (
@@ -19,15 +21,20 @@ const Index = () => {
         
         {/* Menu Section */}
         <MenuSection />
-        
+
+        {/* Testimonials Section*/}
+        {/* <Testimonials /> */}
+
         {/* About Section */}
         <AboutSection />
         
         {/* Gallery Section */}
         <GallerySection />
+
+        <Reservations />
         
         {/* Contact & Reservations Section */}
-        <ContactSection />
+        {/* <ContactSection /> */}
       </main>
       
       {/* Floating Call-to-Action Button */}
@@ -64,8 +71,7 @@ const Index = () => {
                 <li><a href="#menu" className="hover:text-cream transition-colors">Menu</a></li>
                 <li><a href="#about" className="hover:text-cream transition-colors">About Us</a></li>
                 <li><a href="#gallery" className="hover:text-cream transition-colors">Gallery</a></li>
-                <li><a href="#contact" className="hover:text-cream transition-colors">Contact</a></li>
-                <li><a href="#" className="hover:text-cream transition-colors">Careers</a></li>
+                <li><a href="#reservations" className="hover:text-cream transition-colors">Reservation</a></li>
               </ul>
             </div>
             
@@ -73,14 +79,14 @@ const Index = () => {
             <div>
               <h4 className="font-semibold mb-4">Contact</h4>
               <ul className="space-y-2 text-cream/80 text-sm">
-                <li>123 Coffee Street</li>
-                <li>New York, NY 10001</li>
-                <li className="pt-2">+1 (555) 123-4567</li>
-                <li>hello@aromacafe.com</li>
+                <li>Shop 15/16/17, ABC Rutuja Elegancet</li>
+                <li>Ward 22, Akurdi, Pune</li>
+                <li className="pt-2">+91 7387833732</li>
+                <li>cafedeccanbrews@gmail.com</li>
                 <li className="pt-2">
                   <strong className="text-cream">Hours:</strong><br />
-                  Mon-Fri: 6AM - 9PM<br />
-                  Sat-Sun: 7AM - 10PM
+                  Mon-Fri: 8AM - 11.30PM<br />
+                  Sat-Sun: 8AM - 11.30PM
                 </li>
               </ul>
             </div>

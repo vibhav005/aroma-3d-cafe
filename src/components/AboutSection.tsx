@@ -29,33 +29,38 @@ const values = [
 
 const AboutSection = () => {
   return (
-    <section id="about" className="py-20 bg-background relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23886B47' fill-opacity='1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        }} />
+    <section id="about" className="py-20 bg-cream text-coffee-rich relative overflow-hidden">
+      {/* Subtle background pattern */}
+      <div className="absolute inset-0 pointer-events-none opacity-20">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='56' height='56' viewBox='0 0 56 56' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Ccircle cx='28' cy='28' r='1.25' fill='%23886B47'/%3E%3C/g%3E%3C/svg%3E")`,
+          }}
+        />
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
-        {/* Section Header */}
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-12 md:mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-coffee-rich mb-4">
-            Our Story
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <div className="inline-flex items-center gap-2 bg-cream/80 backdrop-blur-xl border border-coffee-rich/15 rounded-full px-3 py-1.5 mb-4 shadow-sm">
+            <span className="w-1.5 h-1.5 rounded-full bg-coffee-rich" />
+            <span className="text-xs font-medium">Since 2025 • Pune</span>
+          </div>
+          <h2 className="text-4xl md:text-5xl font-display font-bold mb-3">Our Story</h2>
+          <p className="text-lg md:text-xl text-coffee-rich/70 max-w-2xl mx-auto">
             Born from a passion for exceptional coffee and genuine hospitality
           </p>
         </motion.div>
 
-        {/* Main Content Grid */}
-        <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
+        {/* Main Content */}
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-16">
           {/* Image Side */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -64,73 +69,80 @@ const AboutSection = () => {
             transition={{ duration: 0.8 }}
             className="relative"
           >
-            <div className="relative overflow-hidden rounded-2xl shadow-warm">
-              <img 
-                src={cafeInteriorImage} 
+            {/* Frame */}
+            <div className="relative overflow-hidden rounded-2xl shadow-warm border border-coffee-rich/15">
+              <div className="absolute inset-0 z-[1] bg-gradient-to-t from-coffee-rich/25 to-transparent pointer-events-none" />
+              <img
+                src={cafeInteriorImage}
                 alt="Cozy cafe interior with warm lighting and plants"
-                className="w-full h-[500px] object-cover"
+                className="w-full h-[460px] md:h-[520px] object-cover"
+                loading="lazy"
+                decoding="async"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-coffee-rich/30 to-transparent" />
+
+              {/* Corner accents */}
+              <div className="pointer-events-none absolute -top-8 -left-8 w-32 h-32 rounded-full bg-coffee-medium/10 blur-2xl" />
+              <div className="pointer-events-none absolute -bottom-10 -right-10 w-40 h-40 rounded-full bg-sage/10 blur-2xl" />
             </div>
-            
-            {/* Floating Stats Card */}
+
+            {/* Floating Founded card */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, scale: 0.9, y: 12 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="absolute -bottom-6 -right-6 bg-card/95 backdrop-blur-sm rounded-xl p-6 shadow-floating border border-border/50"
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="absolute -bottom-6 -right-3 md:-right-6 bg-cream/90 backdrop-blur-xl rounded-xl px-6 py-5 shadow-xl border border-coffee-rich/15"
             >
               <div className="text-center">
-                <div className="text-3xl font-bold text-coffee-medium mb-1">2018</div>
-                <div className="text-sm text-muted-foreground">Founded</div>
+                <div className="text-3xl font-bold">2025</div>
+                <div className="text-sm text-coffee-rich/70">Founded</div>
               </div>
             </motion.div>
           </motion.div>
 
-          {/* Content Side */}
+          {/* Copy + Values */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
             className="space-y-6"
           >
-            <h3 className="text-3xl font-display font-semibold text-coffee-rich mb-6">
-              Crafting Exceptional Experiences Since 2018
+            <h3 className="text-3xl font-display font-semibold">
+              Crafting Exceptional Experiences Since 2025
             </h3>
-            
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              What started as a dream to create the perfect coffee experience has grown into 
-              a beloved community gathering place. We source our beans directly from farmers 
-              who share our commitment to quality and sustainability.
-            </p>
-            
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Our cozy space combines modern design with warm, natural elements—from reclaimed 
-              wood tables to living walls filled with plants. Every detail is thoughtfully 
-              curated to create an atmosphere where conversations flow as smoothly as our coffee.
+
+            <p className="text-lg leading-relaxed text-coffee-rich/80">
+              What started as a dream to create the perfect coffee experience has grown into a beloved
+              community gathering place. We source our beans directly from farmers who share our
+              commitment to quality and sustainability.
             </p>
 
-            {/* Values Grid */}
+            <p className="text-lg leading-relaxed text-coffee-rich/80">
+              Our cozy space combines modern design with warm, natural elements—from reclaimed wood
+              tables to living walls filled with plants. Every detail is thoughtfully curated to
+              create an atmosphere where conversations flow as smoothly as our coffee.
+            </p>
+
+            {/* Values list */}
             <div className="grid gap-4 mt-8">
               {values.map((value, index) => (
                 <motion.div
                   key={value.title}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 18 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.1 * index }}
-                  className="flex gap-4 p-4 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors duration-300"
+                  transition={{ duration: 0.5, delay: 0.06 * index }}
+                  className="flex gap-4 p-4 rounded-xl bg-cream/70 border border-coffee-rich/10 hover:bg-cream/90 transition-colors"
                 >
                   <div className="flex-shrink-0">
-                    <div className="w-12 h-12 bg-coffee-medium/10 rounded-lg flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-xl bg-coffee-medium/10 border border-coffee-rich/10 grid place-items-center">
                       <value.icon className="h-6 w-6 text-coffee-medium" />
                     </div>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-coffee-rich mb-2">{value.title}</h4>
-                    <p className="text-muted-foreground text-sm">{value.description}</p>
+                    <h4 className="font-semibold mb-1">{value.title}</h4>
+                    <p className="text-sm text-coffee-rich/75">{value.description}</p>
                   </div>
                 </motion.div>
               ))}
@@ -138,50 +150,52 @@ const AboutSection = () => {
           </motion.div>
         </div>
 
-        {/* Stats Section */}
+        {/* Stats */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-8 bg-gradient-to-r from-coffee-medium/5 to-sage/5 p-8 rounded-2xl"
+          transition={{ duration: 0.7 }}
+          className="rounded-2xl bg-cream/70 border border-coffee-rich/10 p-6 md:p-8 shadow-soft"
         >
-          {stats.map((stat, index) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="text-center group"
-            >
-              <div className="flex justify-center mb-3">
-                <div className="w-16 h-16 bg-background rounded-full flex items-center justify-center shadow-soft group-hover:shadow-warm transition-shadow duration-300">
-                  <stat.icon className={`h-8 w-8 ${stat.color}`} />
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+            {stats.map((stat, index) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.08 }}
+                className="text-center"
+              >
+                <div className="mx-auto mb-3 w-16 h-16 rounded-full border border-coffee-rich/15 bg-cream grid place-items-center shadow-sm">
+                  <stat.icon className={`h-8 w-8 ${stat.color}`} aria-hidden="true" />
                 </div>
-              </div>
-              <div className="text-3xl font-bold text-coffee-rich mb-1">{stat.value}</div>
-              <div className="text-muted-foreground text-sm">{stat.label}</div>
-            </motion.div>
-          ))}
+                <div className="text-3xl font-bold">{stat.value}</div>
+                <div className="text-sm text-coffee-rich/70">{stat.label}</div>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
 
-        {/* Mission Statement */}
+        {/* Mission / Quote */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mt-20"
+          transition={{ duration: 0.7, delay: 0.1 }}
+          className="text-center mt-16 md:mt-20"
         >
           <div className="max-w-4xl mx-auto">
-            <blockquote className="text-2xl md:text-3xl font-display font-medium text-coffee-rich leading-relaxed italic">
-              "We believe that great coffee has the power to bring people together, 
-              spark conversations, and create moments of joy in everyday life."
-            </blockquote>
-            <footer className="mt-6 text-muted-foreground">
-              — Maria Rodriguez, Founder & Head Roaster
-            </footer>
+            <div className="border-t border-coffee-rich/15 pt-8">
+              <blockquote className="text-2xl md:text-3xl font-display font-medium leading-relaxed italic">
+                “We believe that great coffee has the power to bring people together, spark conversations,
+                and create moments of joy in everyday life.”
+              </blockquote>
+              <footer className="mt-6 text-coffee-rich/70">
+                — Maria Rodriguez, Founder &amp; Head Roaster
+              </footer>
+            </div>
           </div>
         </motion.div>
       </div>
