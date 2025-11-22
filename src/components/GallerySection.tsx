@@ -9,72 +9,70 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import heroImage from "@/assets/hero-coffee.jpg";
-import cafeInteriorImage from "@/assets/cafe-interior.jpg";
-import latteImage from "@/assets/latte-art.jpg";
-import pastriesImage from "@/assets/pastries.jpg";
+import { GalleryItem } from "@/types";
+import galleryItems from "@/utils/galleryItems";
 
 /* ----------------------------- Data / Types ----------------------------- */
 
-type GalleryItem = {
-  id: number;
-  image: string;
-  title: string;
-  description: string;
-  likes: number;
-  category: "Coffee" | "Interior" | "Latte Art" | "Pastries";
-};
+// type GalleryItem = {
+//   id: number;
+//   image: string;
+//   title: string;
+//   description: string;
+//   likes: number;
+//   category: "Coffee" | "Interior" | "Latte Art" | "Pastries";
+// };
 
-const galleryItems: GalleryItem[] = [
-  {
-    id: 1,
-    image: heroImage,
-    title: "Perfect Morning Brew",
-    description: "Start your day with our signature blend",
-    likes: 342,
-    category: "Coffee",
-  },
-  {
-    id: 2,
-    image: cafeInteriorImage,
-    title: "Cozy Interior",
-    description: "Warm atmosphere perfect for work or relaxation",
-    likes: 289,
-    category: "Interior",
-  },
-  {
-    id: 3,
-    image: latteImage,
-    title: "Artisan Latte Art",
-    description: "Every cup is a work of art",
-    likes: 456,
-    category: "Latte Art",
-  },
-  {
-    id: 4,
-    image: pastriesImage,
-    title: "Fresh Pastries",
-    description: "Baked daily with love and premium ingredients",
-    likes: 198,
-    category: "Pastries",
-  },
-  {
-    id: 5,
-    image: heroImage,
-    title: "Golden Hour Coffee",
-    description: "Perfect lighting, perfect coffee",
-    likes: 523,
-    category: "Coffee",
-  },
-  {
-    id: 6,
-    image: cafeInteriorImage,
-    title: "Community Space",
-    description: "Where conversations and friendships bloom",
-    likes: 167,
-    category: "Interior",
-  },
-];
+// const galleryItems: GalleryItem[] = [
+//   {
+//     id: 1,
+//     image: heroImage,
+//     title: "Perfect Morning Brew",
+//     description: "Start your day with our signature blend",
+//     likes: 342,
+//     category: "Coffee",
+//   },
+//   {
+//     id: 2,
+//     image: cafeInteriorImage,
+//     title: "Cozy Interior",
+//     description: "Warm atmosphere perfect for work or relaxation",
+//     likes: 289,
+//     category: "Interior",
+//   },
+//   {
+//     id: 3,
+//     image: latteImage,
+//     title: "Artisan Latte Art",
+//     description: "Every cup is a work of art",
+//     likes: 456,
+//     category: "Latte Art",
+//   },
+//   {
+//     id: 4,
+//     image: pastriesImage,
+//     title: "Fresh Pastries",
+//     description: "Baked daily with love and premium ingredients",
+//     likes: 198,
+//     category: "Pastries",
+//   },
+//   {
+//     id: 5,
+//     image: heroImage,
+//     title: "Golden Hour Coffee",
+//     description: "Perfect lighting, perfect coffee",
+//     likes: 523,
+//     category: "Coffee",
+//   },
+//   {
+//     id: 6,
+//     image: cafeInteriorImage,
+//     title: "Community Space",
+//     description: "Where conversations and friendships bloom",
+//     likes: 167,
+//     category: "Interior",
+//   },
+// ];
 
 const categories = [
   "All",
@@ -572,18 +570,22 @@ const GallerySection: React.FC = () => {
             Share Your Brews Moments
           </h3>
           <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-            Tag us @Deccan Brews Cafe and use #Deccanbrewscafe to be featured in our
-            gallery. We love seeing how our coffee becomes part of your daily
-            story.
+            Tag us @Deccan Brews Cafe and use #Deccanbrewscafe to be featured in
+            our gallery. We love seeing how our coffee becomes part of your
+            daily story.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-coffee-medium hover:bg-coffee-rich" onClick={() =>
+            <Button
+              size="lg"
+              className="bg-coffee-medium hover:bg-coffee-rich"
+              onClick={() =>
                 window.open(
                   "https://www.instagram.com/deccanbrewscafe?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
                   "_blank",
                   "noopener,noreferrer"
                 )
-              }>
+              }
+            >
               <Instagram className="mr-2 h-5 w-5" />
               Follow Us
             </Button>

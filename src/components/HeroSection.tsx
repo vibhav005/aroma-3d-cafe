@@ -1,11 +1,12 @@
 import React from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ArrowDown, Play, Coffee, Heart, Star } from "lucide-react";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { ArrowDown, Play, Coffee, Heart, Star, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-coffee.jpg";
 import cafeInterior from "@/assets/cafe-interior.jpg";
 import latteArt from "@/assets/latte-art.jpg";
 import pastries from "@/assets/pastries.jpg";
+import cafeAmbience from "@/assets/cafe-ambience.mp4";
 
 const ModernShowcase = () => {
   const reduceMotion =
@@ -54,10 +55,8 @@ const ModernShowcase = () => {
   ];
 
   const total = showcaseItems.length;
-  const goPrev = () =>
-    setActiveCard((p) => (p - 1 + total) % total);
-  const goNext = () =>
-    setActiveCard((p) => (p + 1) % total);
+  const goPrev = () => setActiveCard((p) => (p - 1 + total) % total);
+  const goNext = () => setActiveCard((p) => (p + 1) % total);
 
   // Autoplay (pause on interaction/reduced motion)
   React.useEffect(() => {
@@ -97,7 +96,8 @@ const ModernShowcase = () => {
     <div className="relative h-full w-full select-none">
       {/* SR-only announcer */}
       <div aria-live="polite" className="sr-only">
-        Showing: {showcaseItems[activeCard].title} — {showcaseItems[activeCard].subtitle}
+        Showing: {showcaseItems[activeCard].title} —{" "}
+        {showcaseItems[activeCard].subtitle}
       </div>
 
       {/* Responsive layout:
@@ -124,7 +124,10 @@ const ModernShowcase = () => {
               initial={{ opacity: 0.0, scale: reduceMotion ? 1 : 1.04 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: reduceMotion ? 1 : 0.98 }}
-              transition={{ duration: reduceMotion ? 0 : 0.6, ease: [0.4, 0, 0.2, 1] }}
+              transition={{
+                duration: reduceMotion ? 0 : 0.6,
+                ease: [0.4, 0, 0.2, 1],
+              }}
             >
               {!imgReady && (
                 <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-background/40 to-background/20" />
@@ -132,13 +135,17 @@ const ModernShowcase = () => {
               <img
                 src={showcaseItems[activeCard].src}
                 alt={showcaseItems[activeCard].title}
-                className={`w-full h-full object-cover transition-opacity duration-300 ${imgReady ? "opacity-100" : "opacity-0"}`}
+                className={`w-full h-full object-cover transition-opacity duration-300 ${
+                  imgReady ? "opacity-100" : "opacity-0"
+                }`}
                 onLoad={() => setImgReady(true)}
                 loading="eager"
                 decoding="async"
                 fetchPriority="high"
               />
-              <div className={`absolute inset-0 bg-gradient-to-br ${showcaseItems[activeCard].color}`} />
+              <div
+                className={`absolute inset-0 bg-gradient-to-br ${showcaseItems[activeCard].color}`}
+              />
               {/* Soft vignette to help legibility on small screens */}
               <div className="absolute inset-0 pointer-events-none [background:radial-gradient(120%_60%_at_50%_100%,_rgba(0,0,0,0.28),_transparent_60%)]" />
             </motion.div>
@@ -197,7 +204,9 @@ const ModernShowcase = () => {
                       aria-current={i === activeCard ? "true" : "false"}
                       title={`Slide ${i + 1}: ${showcaseItems[i].title}`}
                       className={`h-2.5 rounded-full transition-all duration-300 ${
-                        i === activeCard ? "w-6 bg-cream" : "w-2.5 bg-white/40 hover:bg-white/60"
+                        i === activeCard
+                          ? "w-6 bg-cream"
+                          : "w-2.5 bg-white/40 hover:bg-white/60"
                       }`}
                     />
                   ))}
@@ -251,7 +260,9 @@ const ModernShowcase = () => {
                     loading="lazy"
                     decoding="async"
                   />
-                  <div className={`absolute inset-0 bg-gradient-to-br ${item.color}`} />
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-br ${item.color}`}
+                  />
                 </div>
                 <div className="mt-2">
                   <div className="flex items-center gap-2">
@@ -305,7 +316,9 @@ const ModernShowcase = () => {
                         loading="lazy"
                         decoding="async"
                       />
-                      <div className={`absolute inset-0 bg-gradient-to-br ${item.color}`} />
+                      <div
+                        className={`absolute inset-0 bg-gradient-to-br ${item.color}`}
+                      />
                     </div>
                     <div className="min-w-0">
                       <div className="flex items-center gap-2">
@@ -338,8 +351,70 @@ const ModernShowcase = () => {
   );
 };
 
+const VideoLightbox: React.FC<{ onClose: () => void }> = ({ onClose }) => {
+  const reduceMotion = useReducedMotion();
+
+  React.useEffect(() => {
+    // Prevent scrolling
+    document.body.style.overflow = "hidden";
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", onKey);
+
+    return () => {
+      document.body.style.overflow = "";
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [onClose]);
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        key="overlay-video"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 z-[200] bg-black/70 backdrop-blur-md"
+      />
+
+      <motion.div
+        key="dialog-video"
+        initial={{ opacity: 0, scale: reduceMotion ? 1 : 0.98 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: reduceMotion ? 1 : 0.98 }}
+        transition={{ duration: 0.22 }}
+        className="fixed inset-0 z-[201] grid place-items-center p-4"
+      >
+        <div className="relative max-w-md w-full">
+          {/* Video Frame - Vertical */}
+          <div className="relative rounded-2xl top-10 overflow-hidden border border-white/15 bg-black">
+            <video
+              src={cafeAmbience}
+              controls
+              autoPlay
+              className="w-full max-h-[85vh] object-contain"
+            />
+
+            {/* Close Button */}
+            <button
+              onClick={onClose}
+              className="absolute top-3 right-3 w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm grid place-items-center text-cream hover:bg-black/70"
+              aria-label="Close"
+            >
+              <X className="h-5 w-5" />
+            </button>
+          </div>
+        </div>
+      </motion.div>
+    </AnimatePresence>
+  );
+};
 
 const HeroSection = () => {
+  const [showVideo, setShowVideo] = React.useState(false);
+
   const scrollToMenu = () => {
     const element = document.querySelector("#menu");
     if (element) {
@@ -379,7 +454,9 @@ const HeroSection = () => {
               className="inline-flex items-center gap-2 bg-background/30 backdrop-blur-md border border-white/10 rounded-full px-3 py-1.5 mb-5"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-cream" />
-              <span className="text-xs font-medium text-cream/90">Small Batch • Fresh Daily</span>
+              <span className="text-xs font-medium text-cream/90">
+                Small Batch • Fresh Daily
+              </span>
             </motion.div>
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
@@ -422,10 +499,17 @@ const HeroSection = () => {
                 size="lg"
                 variant="outline"
                 className="bg-cream text-coffee-rich hover:bg-warm-white transition-all duration-300 shadow-warm px-8 py-6 text-lg font-semibold"
+                onClick={() => setShowVideo(true)}
               >
                 <Play className="mr-2 h-5 w-5" />
                 Watch Story
               </Button>
+              {/* Video Lightbox */}
+              <AnimatePresence>
+                {showVideo && (
+                  <VideoLightbox onClose={() => setShowVideo(false)} />
+                )}
+              </AnimatePresence>
             </motion.div>
 
             {/* Stats */}
@@ -466,7 +550,6 @@ const HeroSection = () => {
             <div className="relative h-full rounded-3xl overflow-hidden bg-background/10 backdrop-blur-md border border-white/10 shadow-xl ring-1 ring-white/10 z-10">
               <ModernShowcase />
             </div>
-
           </motion.div>
         </div>
       </div>

@@ -1,35 +1,51 @@
-import { motion } from 'framer-motion';
-import { Coffee, Heart, Users, Award } from 'lucide-react';
-import cafeInteriorImage from '@/assets/cafe-interior.jpg';
+import { motion } from "framer-motion";
+import { Coffee, Heart, Users, Award } from "lucide-react";
+import cafeInteriorImage from "@/assets/Interior.jpg";
 
 const stats = [
-  { icon: Coffee, value: '10k+', label: 'Cups Served Daily', color: 'text-coffee-medium' },
-  { icon: Heart, value: '98%', label: 'Customer Satisfaction', color: 'text-red-500' },
-  { icon: Users, value: '50+', label: 'Team Members', color: 'text-sage' },
-  { icon: Award, value: '15+', label: 'Awards Won', color: 'text-yellow-500' },
+  {
+    icon: Coffee,
+    value: "10k+",
+    label: "Cups Served Daily",
+    color: "text-coffee-medium",
+  },
+  {
+    icon: Heart,
+    value: "98%",
+    label: "Customer Satisfaction",
+    color: "text-red-500",
+  },
+  { icon: Users, value: "50+", label: "Team Members", color: "text-sage" },
+  { icon: Award, value: "15+", label: "Awards Won", color: "text-yellow-500" },
 ];
 
 const values = [
   {
-    title: 'Artisan Quality',
-    description: 'Every cup is crafted with precision using premium beans from sustainable farms worldwide.',
+    title: "Artisan Quality",
+    description:
+      "Every cup is crafted with precision using premium beans from sustainable farms worldwide.",
     icon: Coffee,
   },
   {
-    title: 'Community First',
-    description: 'We believe in building connections and creating a welcoming space for everyone.',
+    title: "Community First",
+    description:
+      "We believe in building connections and creating a welcoming space for everyone.",
     icon: Heart,
   },
   {
-    title: 'Sustainability',
-    description: 'Committed to eco-friendly practices from bean to cup, supporting local and organic suppliers.',
+    title: "Sustainability",
+    description:
+      "Committed to eco-friendly practices from bean to cup, supporting local and organic suppliers.",
     icon: Users,
   },
 ];
 
 const AboutSection = () => {
   return (
-    <section id="about" className="py-20 bg-cream text-coffee-rich relative overflow-hidden">
+    <section
+      id="about"
+      className="py-20 bg-cream text-coffee-rich relative overflow-hidden"
+    >
       {/* Subtle background pattern */}
       <div className="absolute inset-0 pointer-events-none opacity-20">
         <div
@@ -53,7 +69,9 @@ const AboutSection = () => {
             <span className="w-1.5 h-1.5 rounded-full bg-coffee-rich" />
             <span className="text-xs font-medium">Since 2025 • Pune</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-3">Our Story</h2>
+          <h2 className="text-4xl md:text-5xl font-display font-bold mb-3">
+            Our Story
+          </h2>
           <p className="text-lg md:text-xl text-coffee-rich/70 max-w-2xl mx-auto">
             Born from a passion for exceptional coffee and genuine hospitality
           </p>
@@ -113,15 +131,17 @@ const AboutSection = () => {
             </h3>
 
             <p className="text-lg leading-relaxed text-coffee-rich/80">
-              What started as a dream to create the perfect coffee experience has grown into a beloved
-              community gathering place. We source our beans directly from farmers who share our
-              commitment to quality and sustainability.
+              What started as a dream to create the perfect coffee experience
+              has grown into a beloved community gathering place. We source our
+              beans directly from farmers who share our commitment to quality
+              and sustainability.
             </p>
 
             <p className="text-lg leading-relaxed text-coffee-rich/80">
-              Our cozy space combines modern design with warm, natural elements—from reclaimed wood
-              tables to living walls filled with plants. Every detail is thoughtfully curated to
-              create an atmosphere where conversations flow as smoothly as our coffee.
+              Our cozy space combines modern design with warm, natural
+              elements—from reclaimed wood tables to living walls filled with
+              plants. Every detail is thoughtfully curated to create an
+              atmosphere where conversations flow as smoothly as our coffee.
             </p>
 
             {/* Values list */}
@@ -142,7 +162,9 @@ const AboutSection = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold mb-1">{value.title}</h4>
-                    <p className="text-sm text-coffee-rich/75">{value.description}</p>
+                    <p className="text-sm text-coffee-rich/75">
+                      {value.description}
+                    </p>
                   </div>
                 </motion.div>
               ))}
@@ -169,7 +191,10 @@ const AboutSection = () => {
                 className="text-center"
               >
                 <div className="mx-auto mb-3 w-16 h-16 rounded-full border border-coffee-rich/15 bg-cream grid place-items-center shadow-sm">
-                  <stat.icon className={`h-8 w-8 ${stat.color}`} aria-hidden="true" />
+                  <stat.icon
+                    className={`h-8 w-8 ${stat.color}`}
+                    aria-hidden="true"
+                  />
                 </div>
                 <div className="text-3xl font-bold">{stat.value}</div>
                 <div className="text-sm text-coffee-rich/70">{stat.label}</div>
@@ -189,8 +214,9 @@ const AboutSection = () => {
           <div className="max-w-4xl mx-auto">
             <div className="border-t border-coffee-rich/15 pt-8">
               <blockquote className="text-2xl md:text-3xl font-display font-medium leading-relaxed italic">
-                “We believe that great coffee has the power to bring people together, spark conversations,
-                and create moments of joy in everyday life.”
+                “We believe that great coffee has the power to bring people
+                together, spark conversations, and create moments of joy in
+                everyday life.”
               </blockquote>
               <footer className="mt-6 text-coffee-rich/70">
                 — Maria Rodriguez, Founder &amp; Head Roaster

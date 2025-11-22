@@ -8,10 +8,9 @@ export interface Reservation {
   specialRequests?: string;
 }
 
-
 export interface ToastMessage {
   id: string;
-  type: 'success' | 'error' | 'warning' | 'info';
+  type: "success" | "error" | "warning" | "info";
   title: string;
   message: string;
   duration?: number;
@@ -47,3 +46,12 @@ export interface BusinessInfo {
     youtube?: string;
   };
 }
+
+export type GalleryItem = {
+  id: number;
+  image: string;
+  title: string;
+  description: string;
+  likes: number;
+  category: "Coffee" | "Interior" | "Latte Art" | "Pastries";
+};
