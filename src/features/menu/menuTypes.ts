@@ -3,6 +3,9 @@ export type Category =
   | "Coffee"
   | "Pastries"
   | "Cold Coffee"
+  | "Tea"
+  | "Iced Tea"
+  | "Shakes"
   | "Brunch"
   | "Desserts";
 
@@ -23,6 +26,9 @@ export const categories: readonly ("All" | Category)[] = [
   "Coffee",
   "Pastries",
   "Cold Coffee",
+  "Tea",
+  "Iced Tea",
+  "Shakes",
   "Brunch",
   "Desserts",
 ] as const;

@@ -4,7 +4,7 @@ import { ArrowDown, Play, Coffee, Heart, Star, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/heroImage.jpeg";
 import cafeInterior from "@/assets/Interior.png";
-import chillVietnamese from "@/assets/coffee/chill_vietnamese.png";
+import chillVietnamese from "@/assets/coffee/chill_vietnamese.jpg";
 import pastries from "@/assets/pastries.jpg";
 import cafeAmbience from "@/assets/cafe-ambience.mp4";
 

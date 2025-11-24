@@ -8,15 +8,24 @@ import { addToCart } from "@/lib/cartBus";
 
 /* ------- Card (polished visuals, skeleton image, chips) ------- */
 const MenuCard: React.FC<{ item: MenuItem }> = ({ item }) => {
-  const [loaded, setLoaded] = React.useState(false);
   const priceToNumber = (p: string) => {
     const n = parseFloat(p.replace(/[^0-9.]/g, ""));
     return Number.isFinite(n) ? n : 0;
   };
+  const [loaded, setLoaded] = React.useState(false);
+
+  const handleAddToCart = React.useCallback(() => {
+    addToCart({
+      id: item.id,
+      name: item.name,
+      price: priceToNumber(item.price),
+      image: item.image,
+    });
+  }, [item.id, item.name, item.price, item.image]);
+
   return (
     <Card className="group hover:shadow-warm transition-all duration-500 overflow-hidden border border-white/10 bg-card/80 backdrop-blur-sm rounded-2xl">
       <div className="relative overflow-hidden">
-        {/* Image + skeleton */}
         {!loaded && (
           <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-background/40 to-background/20" />
         )}
@@ -31,7 +40,7 @@ const MenuCard: React.FC<{ item: MenuItem }> = ({ item }) => {
           decoding="async"
         />
 
-        {/* Top-left: Rating */}
+        {/* Rating */}
         <div className="absolute top-4 left-4 bg-card/90 backdrop-blur-sm rounded-full px-2.5 py-1 border border-white/10">
           <div className="flex items-center gap-1 text-sm">
             <Star
@@ -42,7 +51,7 @@ const MenuCard: React.FC<{ item: MenuItem }> = ({ item }) => {
           </div>
         </div>
 
-        {/* Top-right: Price chip */}
+        {/* Price */}
         <div className="absolute top-4 right-4 rounded-full bg-coffee-medium text-cream px-3 py-1.5 text-sm font-semibold shadow-soft">
           {item.price}
         </div>
@@ -70,7 +79,6 @@ const MenuCard: React.FC<{ item: MenuItem }> = ({ item }) => {
           <h3 className="text-xl font-semibold text-coffee-rich group-hover:text-coffee-medium transition-colors duration-300">
             {item.name}
           </h3>
-          {/* Category pill (light) */}
           <span className="text-xs font-medium bg-background/40 border border-white/10 text-foreground px-2.5 py-1 rounded-full">
             {item.category}
           </span>
@@ -97,14 +105,7 @@ const MenuCard: React.FC<{ item: MenuItem }> = ({ item }) => {
             whileTap={{ scale: 0.95 }}
             className="bg-coffee-medium hover:bg-coffee-rich text-cream px-4 py-2 rounded-full font-medium transition-colors duration-300"
             aria-label={`Add ${item.name} to order`}
-            onClick={() =>
-              addToCart({
-                id: item.id,
-                name: item.name,
-                price: priceToNumber(item.price),
-                image: item.image,
-              })
-            }
+            onClick={handleAddToCart}
           >
             Add to Order
           </motion.button>

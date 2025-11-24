@@ -12,8 +12,11 @@ import {
   type MenuItem,
 } from "@/features/menu/menuTypes";
 import { menuItems } from "@/features/menu/menuData";
+import MenuCard from "./ui/MenuCard";
 
 type SortKey = "popular" | "price-asc" | "price-desc" | "time";
+
+const PAGE_SIZE = 6;
 
 const priceToNumber = (p: string) => {
   const n = parseFloat(p.replace(/[^0-9.]/g, ""));
@@ -31,6 +34,12 @@ const MenuSection: React.FC = () => {
   const [activeCat, setActiveCat] = React.useState<Category | "All">("All");
   const [query, setQuery] = React.useState("");
   const [sort, setSort] = React.useState<SortKey>("popular");
+  const [page, setPage] = React.useState(1);
+
+  // Reset to page 1 whenever filters change
+  React.useEffect(() => {
+    setPage(1);
+  }, [activeCat, query, sort]);
 
   const filtered = React.useMemo(() => {
     let items = [...menuItems];
@@ -66,6 +75,25 @@ const MenuSection: React.FC = () => {
 
     return items;
   }, [activeCat, query, sort]);
+
+  const pageCount = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const clampedPage = Math.min(page, pageCount);
+
+  const visibleItems = React.useMemo(
+    () =>
+      filtered.slice((clampedPage - 1) * PAGE_SIZE, clampedPage * PAGE_SIZE),
+    [filtered, clampedPage]
+  );
+
+  const goToPage = (p: number) => {
+    setPage((prev) => {
+      const next = Math.min(Math.max(p, 1), pageCount);
+      return next === prev ? prev : next;
+    });
+  };
+
+  const goPrev = () => goToPage(clampedPage - 1);
+  const goNext = () => goToPage(clampedPage + 1);
 
   return (
     <section id="menu" className="py-20 bg-warm-gradient">
@@ -177,141 +205,68 @@ const MenuSection: React.FC = () => {
 
         {/* Menu Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filtered.map((item, index) => (
+          {visibleItems.map((item) => (
             <motion.div
               key={item.id}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.06 }}
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{ duration: 0.35 }}
             >
-              <MenuCard item={item} />
+              <MemoMenuCard item={item} />
             </motion.div>
           ))}
         </div>
 
-        {/* View Full Menu Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-center mt-12"
-        >
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-transparent border-2 border-coffee-medium text-coffee-medium hover:bg-coffee-medium hover:text-cream px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-soft hover:shadow-warm"
-          >
-            View Full Menu
-          </motion.button>
-        </motion.div>
+        {/* Pagination */}
+        {pageCount > 1 && (
+          <div className="mt-10 flex items-center justify-center gap-3">
+            <button
+              onClick={goPrev}
+              disabled={clampedPage === 1}
+              className={`px-3 py-2 rounded-full text-sm font-medium border ${
+                clampedPage === 1
+                  ? "border-transparent text-muted-foreground/50 cursor-default"
+                  : "border-coffee-medium text-coffee-medium hover:bg-coffee-medium hover:text-cream transition-colors"
+              }`}
+            >
+              Prev
+            </button>
+
+            <div className="flex items-center gap-1">
+              {Array.from({ length: pageCount }, (_, i) => i + 1).map((p) => (
+                <button
+                  key={p}
+                  onClick={() => goToPage(p)}
+                  className={`w-8 h-8 rounded-full text-sm font-medium flex items-center justify-center transition-colors ${
+                    p === clampedPage
+                      ? "bg-coffee-medium text-cream"
+                      : "bg-background/40 text-coffee-medium hover:bg-coffee-light/30"
+                  }`}
+                >
+                  {p}
+                </button>
+              ))}
+            </div>
+
+            <button
+              onClick={goNext}
+              disabled={clampedPage === pageCount}
+              className={`px-3 py-2 rounded-full text-sm font-medium border ${
+                clampedPage === pageCount
+                  ? "border-transparent text-muted-foreground/50 cursor-default"
+                  : "border-coffee-medium text-coffee-medium hover:bg-coffee-medium hover:text-cream transition-colors"
+              }`}
+            >
+              Next
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
 };
 
-/* ------- Card ------- */
-const MenuCard: React.FC<{ item: MenuItem }> = ({ item }) => {
-  const [loaded, setLoaded] = React.useState(false);
-
-  return (
-    <Card className="group hover:shadow-warm transition-all duration-500 overflow-hidden border border-white/10 bg-card/80 backdrop-blur-sm rounded-2xl">
-      <div className="relative overflow-hidden">
-        {!loaded && (
-          <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-background/40 to-background/20" />
-        )}
-        <img
-          src={item.image}
-          alt={item.name}
-          className={`w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110 ${
-            loaded ? "opacity-100" : "opacity-0"
-          }`}
-          onLoad={() => setLoaded(true)}
-          loading="lazy"
-          decoding="async"
-        />
-
-        {/* Rating */}
-        <div className="absolute top-4 left-4 bg-card/90 backdrop-blur-sm rounded-full px-2.5 py-1 border border-white/10">
-          <div className="flex items-center gap-1 text-sm">
-            <Star
-              className="h-4 w-4 fill-yellow-400 text-yellow-400"
-              aria-hidden="true"
-            />
-            <span className="font-medium text-foreground">{item.rating}</span>
-          </div>
-        </div>
-
-        {/* Price */}
-        <div className="absolute top-4 right-4 rounded-full bg-coffee-medium text-cream px-3 py-1.5 text-sm font-semibold shadow-soft">
-          {item.price}
-        </div>
-
-        {/* Tags */}
-        <div className="absolute bottom-3 left-3 right-3 flex flex-wrap gap-2">
-          {item.tags.map((tag) => (
-            <Badge
-              key={tag}
-              className="bg-coffee-medium/90 text-cream text-xs border-0"
-            >
-              {tag}
-            </Badge>
-          ))}
-        </div>
-
-        {/* Corner gradient on hover */}
-        <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-          <div className="absolute inset-0 bg-gradient-to-tr from-black/0 via-black/0 to-black/20" />
-        </div>
-      </div>
-
-      <CardContent className="p-6">
-        <div className="flex justify-between items-start mb-3">
-          <h3 className="text-xl font-semibold text-coffee-rich group-hover:text-coffee-medium transition-colors duration-300">
-            {item.name}
-          </h3>
-          <span className="text-xs font-medium bg-background/40 border border-white/10 text-foreground px-2.5 py-1 rounded-full">
-            {item.category}
-          </span>
-        </div>
-
-        <p className="text-muted-foreground mb-4 leading-relaxed">
-          {item.description}
-        </p>
-
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4 text-sm text-muted-foreground">
-            <div className="flex items-center gap-1">
-              <Clock className="h-4 w-4" aria-hidden="true" />
-              <span>{item.time}</span>
-            </div>
-            <div className="flex items-center gap-1">
-              <Leaf className="h-4 w-4 text-sage" aria-hidden="true" />
-              <span>Fresh</span>
-            </div>
-          </div>
-
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-coffee-medium hover:bg-coffee-rich text-cream px-4 py-2 rounded-full font-medium transition-colors duration-300"
-            aria-label={`Add ${item.name} to order`}
-            onClick={() =>
-              addToCart({
-                id: item.id,
-                name: item.name,
-                price: priceToNumber(item.price),
-                image: item.image,
-              })
-            }
-          >
-            Add to Order
-          </motion.button>
-        </div>
-      </CardContent>
-    </Card>
-  );
-};
+const MemoMenuCard = React.memo(MenuCard);
 
 export default MenuSection;
