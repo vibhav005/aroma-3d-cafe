@@ -1,41 +1,46 @@
 import { motion } from "framer-motion";
-import { Coffee, Heart, Users, Award } from "lucide-react";
-import cafeInteriorImage from "@/assets/Interior.jpg";
+import { Coffee, Heart, Users, Sparkles } from "lucide-react";
+import cafeInteriorImage from "@/assets/Interior.png";
 
 const stats = [
   {
     icon: Coffee,
-    value: "10k+",
+    value: "500+",
     label: "Cups Served Daily",
     color: "text-coffee-medium",
   },
   {
     icon: Heart,
-    value: "98%",
+    value: "100%",
     label: "Customer Satisfaction",
     color: "text-red-500",
   },
-  { icon: Users, value: "50+", label: "Team Members", color: "text-sage" },
-  { icon: Award, value: "15+", label: "Awards Won", color: "text-yellow-500" },
+  { icon: Users, value: "5+", label: "Team Members", color: "text-sage" },
+  {
+    icon: Sparkles,
+    value: "2025",
+    label: "Founded with Passion",
+    color: "text-amber-500",
+  },
 ];
 
 const values = [
   {
-    title: "Artisan Quality",
+    title: "Genuine Coffee Craft",
     description:
-      "Every cup is crafted with precision using premium beans from sustainable farms worldwide.",
+      "Serve genuinely great coffee with no shortcuts — every cup is made with care, consistency, and respect for the bean.",
     icon: Coffee,
   },
   {
-    title: "Community First",
+    title: "Warm, Musical Ambience",
     description:
-      "We believe in building connections and creating a welcoming space for everyone.",
+      "Create a cosy brown-and-beige space where people feel at home, with live music and sufi nights at no extra charge.",
     icon: Heart,
   },
   {
-    title: "Sustainability",
+    title: "Family & Community First",
     description:
-      "Committed to eco-friendly practices from bean to cup, supporting local and organic suppliers.",
+      "Keep it family-friendly, and focused on community, culture, and honest hospitality.",
     icon: Users,
   },
 ];
@@ -127,21 +132,28 @@ const AboutSection = () => {
             className="space-y-6"
           >
             <h3 className="text-3xl font-display font-semibold">
-              Crafting Exceptional Experiences Since 2025
+              Crafting Exceptional Experiences Since 2020
             </h3>
 
             <p className="text-lg leading-relaxed text-coffee-rich/80">
-              What started as a dream to create the perfect coffee experience
-              has grown into a beloved community gathering place. We source our
-              beans directly from farmers who share our commitment to quality
-              and sustainability.
+              My name is Anand, and journey of making Deccan Brews began in 2020
+              when I took my very first job in a café. I was young, eager, and
+              curious and what started as just “work” slowly became my passion.
+              From the coffee counter to the kitchen, the tables to the back
+              office, I spent 3-4 years learning every part of the café world.
+              Along the way I realised something important: coffee deserves
+              quality, customers deserve honesty, and the entire café experience
+              deserves respect.
             </p>
 
             <p className="text-lg leading-relaxed text-coffee-rich/80">
-              Our cozy space combines modern design with warm, natural
-              elements—from reclaimed wood tables to living walls filled with
-              plants. Every detail is thoughtfully curated to create an
-              atmosphere where conversations flow as smoothly as our coffee.
+              Instead of accepting what was already there, I decided to build
+              something better and that decision gave birth to Deccan Brews.
+              Today, it’s not just a café; it’s my story of passion, dedication,
+              and the belief that an ordinary beginning can lead to an
+              extraordinary dream if you give it everything. Now, through Deccan
+              Brews Franchise Opportunities, I’m excited to share this vision so
+              more people can join this journey of quality and culture.
             </p>
 
             {/* Values list */}

@@ -2,9 +2,9 @@ import React from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { ArrowDown, Play, Coffee, Heart, Star, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import heroImage from "@/assets/hero-coffee.jpg";
-import cafeInterior from "@/assets/cafe-interior.jpg";
-import latteArt from "@/assets/latte-art.jpg";
+import heroImage from "@/assets/heroImage.jpeg";
+import cafeInterior from "@/assets/Interior.png";
+import chillVietnamese from "@/assets/coffee/chill_vietnamese.png";
 import pastries from "@/assets/pastries.jpg";
 import cafeAmbience from "@/assets/cafe-ambience.mp4";
 
@@ -22,11 +22,12 @@ const ModernShowcase = () => {
   const showcaseItems = [
     {
       src: heroImage,
-      title: "Artisanal Coffee",
-      subtitle: "Hand-crafted perfection",
+      title: "Your Cozy Corner",
+      subtitle: "A warm, brown & beige space where every cup feels like home.",
       icon: Coffee,
       color: "from-coffee-rich/20 to-coffee-medium/20",
       accent: "coffee-rich",
+      objectPosition: "object-top",
     },
     {
       src: cafeInterior,
@@ -37,8 +38,8 @@ const ModernShowcase = () => {
       accent: "sage",
     },
     {
-      src: latteArt,
-      title: "Signature Lattes",
+      src: chillVietnamese,
+      title: "Signature Coffee",
       subtitle: "Art in every cup",
       icon: Star,
       color: "from-cream/20 to-warm-white/20",
@@ -308,7 +309,7 @@ const ModernShowcase = () => {
                   title={item.title}
                 >
                   <div className="flex items-center gap-3">
-                    <div className="relative w-16 h-16 rounded-xl overflow-hidden">
+                    <div className="relative w-20 h-16 rounded-xl overflow-hidden">
                       <img
                         src={item.src}
                         alt=""
@@ -477,8 +478,14 @@ const HeroSection = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-xl text-cream/90 mb-8 max-w-lg mx-auto lg:mx-0"
             >
-              Experience the perfect blend of artisanal coffee, cozy atmosphere,
-              and exceptional service in our modern cafe sanctuary.
+              Welcome to Deccan Brews where coffee meets culture. We serve
+              premium handcrafted coffee and fresh gourmet food in a warm,
+              artistic space designed for conversations, creativity, and
+              comfort.
+              <p>
+                We host live music and cultural events to bring people together
+                always free for our guests.
+              </p>
             </motion.p>
 
             <motion.div

@@ -1,111 +1,25 @@
+// src/features/menu/MenuSection.tsx
 import React from "react";
 import { motion } from "framer-motion";
 import { Star, Clock, Leaf, Search, SlidersHorizontal } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import latteImage from "@/assets/latte-art.jpg";
-import pastriesImage from "@/assets/pastries.jpg";
 import { addToCart } from "@/lib/cartBus";
 
-type MenuItem = {
-  id: number;
-  name: string;
-  description: string;
-  price: string; // "$4.50"
-  image: string;
-  category: "Coffee" | "Pastries" | "Cold Coffee" | "Brunch" | "Desserts";
-  rating: number;
-  time: string; // "3 mins" | "Ready"
-  tags: string[];
-};
+import {
+  categories,
+  type Category,
+  type MenuItem,
+} from "@/features/menu/menuTypes";
+import { menuItems } from "@/features/menu/menuData";
 
-const menuItems: MenuItem[] = [
-  {
-    id: 1,
-    name: "Signature Latte",
-    description: "Rich espresso with perfectly steamed milk and artistic foam",
-    price: "$4.50",
-    image: latteImage,
-    category: "Coffee",
-    rating: 4.9,
-    time: "3 mins",
-    tags: ["Popular", "Signature"],
-  },
-  {
-    id: 2,
-    name: "Artisan Croissant",
-    description:
-      "Buttery, flaky pastry baked fresh daily with premium ingredients",
-    price: "$3.25",
-    image: pastriesImage,
-    category: "Pastries",
-    rating: 4.8,
-    time: "2 mins",
-    tags: ["Fresh Baked", "Organic"],
-  },
-  {
-    id: 3,
-    name: "Cold Brew Concentrate",
-    description: "Smooth, bold coffee brewed for 24 hours for maximum flavor",
-    price: "$3.75",
-    image: latteImage,
-    category: "Cold Coffee",
-    rating: 4.7,
-    time: "1 min",
-    tags: ["Refreshing", "Strong"],
-  },
-  {
-    id: 4,
-    name: "Avocado Toast Deluxe",
-    description: "Smashed avocado on sourdough with microgreens and sea salt",
-    price: "$8.50",
-    image: pastriesImage,
-    category: "Brunch",
-    rating: 4.6,
-    time: "5 mins",
-    tags: ["Healthy", "Vegan"],
-  },
-  {
-    id: 5,
-    name: "Cappuccino Classic",
-    description:
-      "Traditional Italian cappuccino with perfect foam to espresso ratio",
-    price: "$4.00",
-    image: latteImage,
-    category: "Coffee",
-    rating: 4.8,
-    time: "3 mins",
-    tags: ["Classic", "Traditional"],
-  },
-  {
-    id: 6,
-    name: "Seasonal Fruit Tart",
-    description:
-      "Delicate pastry filled with vanilla cream and fresh seasonal fruits",
-    price: "$5.75",
-    image: pastriesImage,
-    category: "Desserts",
-    rating: 4.9,
-    time: "Ready",
-    tags: ["Seasonal", "Premium"],
-  },
-];
-
-const categories = [
-  "All",
-  "Coffee",
-  "Pastries",
-  "Cold Coffee",
-  "Brunch",
-  "Desserts",
-] as const;
-type Category = (typeof categories)[number];
 type SortKey = "popular" | "price-asc" | "price-desc" | "time";
 
 const priceToNumber = (p: string) => {
   const n = parseFloat(p.replace(/[^0-9.]/g, ""));
   return Number.isFinite(n) ? n : 0;
 };
+
 const timeToMinutes = (t: string) => {
   if (!t) return 0;
   if (t.toLowerCase() === "ready") return 0;
@@ -114,7 +28,7 @@ const timeToMinutes = (t: string) => {
 };
 
 const MenuSection: React.FC = () => {
-  const [activeCat, setActiveCat] = React.useState<Category>("All");
+  const [activeCat, setActiveCat] = React.useState<Category | "All">("All");
   const [query, setQuery] = React.useState("");
   const [sort, setSort] = React.useState<SortKey>("popular");
 
@@ -124,6 +38,7 @@ const MenuSection: React.FC = () => {
     if (activeCat !== "All") {
       items = items.filter((i) => i.category === activeCat);
     }
+
     if (query.trim()) {
       const q = query.toLowerCase();
       items = items.filter(
@@ -178,7 +93,7 @@ const MenuSection: React.FC = () => {
           </p>
         </motion.div>
 
-        {/* Controls Bar (sticky) */}
+        {/* Controls Bar */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -188,7 +103,7 @@ const MenuSection: React.FC = () => {
         >
           <div className="rounded-2xl bg-background/30 backdrop-blur-xl border border-white/10 ring-1 ring-white/10 shadow-soft p-4">
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-              {/* Category chips (horizontal scroll on mobile) */}
+              {/* Category chips */}
               <div
                 className="flex gap-2 overflow-x-auto -mx-1 px-1"
                 style={{
@@ -296,14 +211,13 @@ const MenuSection: React.FC = () => {
   );
 };
 
-/* ------- Card (polished visuals, skeleton image, chips) ------- */
+/* ------- Card ------- */
 const MenuCard: React.FC<{ item: MenuItem }> = ({ item }) => {
   const [loaded, setLoaded] = React.useState(false);
 
   return (
     <Card className="group hover:shadow-warm transition-all duration-500 overflow-hidden border border-white/10 bg-card/80 backdrop-blur-sm rounded-2xl">
       <div className="relative overflow-hidden">
-        {/* Image + skeleton */}
         {!loaded && (
           <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-background/40 to-background/20" />
         )}
@@ -318,7 +232,7 @@ const MenuCard: React.FC<{ item: MenuItem }> = ({ item }) => {
           decoding="async"
         />
 
-        {/* Top-left: Rating */}
+        {/* Rating */}
         <div className="absolute top-4 left-4 bg-card/90 backdrop-blur-sm rounded-full px-2.5 py-1 border border-white/10">
           <div className="flex items-center gap-1 text-sm">
             <Star
@@ -329,7 +243,7 @@ const MenuCard: React.FC<{ item: MenuItem }> = ({ item }) => {
           </div>
         </div>
 
-        {/* Top-right: Price chip */}
+        {/* Price */}
         <div className="absolute top-4 right-4 rounded-full bg-coffee-medium text-cream px-3 py-1.5 text-sm font-semibold shadow-soft">
           {item.price}
         </div>
@@ -357,7 +271,6 @@ const MenuCard: React.FC<{ item: MenuItem }> = ({ item }) => {
           <h3 className="text-xl font-semibold text-coffee-rich group-hover:text-coffee-medium transition-colors duration-300">
             {item.name}
           </h3>
-          {/* Category pill (light) */}
           <span className="text-xs font-medium bg-background/40 border border-white/10 text-foreground px-2.5 py-1 rounded-full">
             {item.category}
           </span>
