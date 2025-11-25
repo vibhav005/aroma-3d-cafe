@@ -1,3 +1,4 @@
+//Coffee Images (cold and hot)
 import chillVietnamese from "@/assets/coffee/chill_vietnamese.jpg";
 import classicCappuccino from "@/assets/coffee/classic_cappucino.jpg";
 import affogato from "@/assets/coffee/afagato.jpg";
@@ -18,7 +19,31 @@ import redBullEspresso from "@/assets/coffee/redbull_espresso.jpg";
 import gingerAle from "@/assets/coffee/ginger_ale.jpg";
 import orangeSunrise from "@/assets/coffee/orange_sunrise.jpg";
 
+// Tea Images (hot and iced)
+import masalaTea from "@/assets/tea/masala_tea.jpg";
+import blueBerryIcedTea from "@/assets/tea/blueberry_iced_tea.jpg";
+import lemonTea from "@/assets/tea/lemon_tea.jpg";
+import litchiIcedTea from "@/assets/tea/litchi_iced_tea.jpg";
+import blackTea from "@/assets/tea/black_tea.jpg";
+import saffronKahwa from "@/assets/tea/saffron_kahwa.jpg";
+import greenTea from "@/assets/tea/green_tea.jpg";
+import lemonGingerTea from "@/assets/tea/lemon_ginger_tea.jpg";
+import grenadineIcedTea from "@/assets/tea/grenadine_iced_tea.jpg";
+import lemonIcedTea from "@/assets/tea/lemon_iced_tea.jpg";
+
+// Shakes Images
+import berryBurst from "@/assets/shakes/berry_burst.jpg";
+import tropicalChill from "@/assets/shakes/tropical_chill.jpg";
+import blushingBerry from "@/assets/shakes/blushing_berry.jpg";
+import tropicalSunshine from "@/assets/shakes/tropical_sunshine.jpg";
+import crunchyChocoDelight from "@/assets/shakes/crunchy_choco_delight_(KitKat).jpg";
+import cookieCrumble from "@/assets/shakes/cookie_crumble_(Oreo).jpg";
+import goldenNutBliss from "@/assets/shakes/golden_nut_bliss_(Ferrero).jpg";
+import spicedBiscuitBliss from "@/assets/shakes/spiced_biscuit_bliss_(Biscoff).jpg";
+import chocoIslandFreakShake from "@/assets/shakes/choco_island_freak_shake.jpg";
+import brownieShake from "@/assets/shakes/brownie_shake.jpg";
 export const coffeeImages = {
+  //Coffe
   chillVietnamese,
   classicCappuccino,
   affogato,
@@ -38,6 +63,30 @@ export const coffeeImages = {
   redBullEspresso,
   gingerAle,
   orangeSunrise,
+
+  //Tea Images
+  masalaTea,
+  blueBerryIcedTea,
+  lemonTea,
+  litchiIcedTea,
+  blackTea,
+  saffronKahwa,
+  greenTea,
+  lemonGingerTea,
+  grenadineIcedTea,
+  lemonIcedTea,
+
+  //Shakes Images
+  berryBurst,
+  tropicalChill,
+  blushingBerry,
+  tropicalSunshine,
+  crunchyChocoDelight,
+  cookieCrumble,
+  goldenNutBliss,
+  spicedBiscuitBliss,
+  chocoIslandFreakShake,
+  brownieShake,
 };
 
 // export const foodImages = {

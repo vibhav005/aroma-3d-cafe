@@ -129,75 +129,77 @@ const MenuSection: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="sticky top-20 z-10 mb-8"
         >
-          <div className="rounded-2xl bg-background/30 backdrop-blur-xl border border-white/10 ring-1 ring-white/10 shadow-soft p-4">
-            <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-              {/* Category chips */}
-              <div
-                className="flex gap-2 overflow-x-auto -mx-1 px-1"
-                style={{
-                  WebkitMaskImage:
-                    "linear-gradient(to right, transparent 0, black 16px, black calc(100% - 16px), transparent 100%)",
-                  maskImage:
-                    "linear-gradient(to right, transparent 0, black 16px, black calc(100% - 16px), transparent 100%)",
-                }}
-              >
-                {categories.map((c) => {
-                  const active = c === activeCat;
-                  return (
-                    <button
-                      key={c}
-                      onClick={() => setActiveCat(c)}
-                      className={`shrink-0 px-4 py-2 rounded-full font-medium transition-all ${
-                        active
-                          ? "bg-coffee-medium text-cream shadow-warm"
-                          : "bg-card text-foreground hover:bg-coffee-light/20 hover:shadow-soft"
-                      }`}
-                      aria-pressed={active}
+          <div className="mb-8">
+            <div className="rounded-2xl bg-background/60 border border-white/10 shadow-sm p-4">
+              <div className="flex flex-col gap-4">
+                {/* Row 1: Search + Sort (full width) */}
+                <div className="flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
+                  <label className="relative flex-1 min-w-[220px]">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-foreground/60" />
+                    <input
+                      type="text"
+                      value={query}
+                      onChange={(e) => setQuery(e.target.value)}
+                      placeholder="Search drinks & pastries…"
+                      className="w-full pl-10 pr-3 py-2 rounded-xl bg-background/70 border border-white/10 text-foreground placeholder:text-foreground/60 focus:outline-none focus:ring-2 focus:ring-cream"
+                      aria-label="Search menu"
+                    />
+                  </label>
+
+                  <label className="relative w-full sm:w-auto">
+                    <span className="sr-only">Sort by</span>
+                    <div className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2">
+                      <SlidersHorizontal className="h-4 w-4 text-foreground/60" />
+                    </div>
+                    <select
+                      value={sort}
+                      onChange={(e) => setSort(e.target.value as SortKey)}
+                      className="w-full sm:w-[180px] appearance-none pl-10 pr-8 py-2 rounded-xl bg-background/70 border border-white/10 text-foreground focus:outline-none focus:ring-2 focus:ring-cream"
                     >
-                      {c}
-                    </button>
-                  );
-                })}
-              </div>
+                      <option value="popular">Popular</option>
+                      <option value="price-asc">Price: Low to High</option>
+                      <option value="price-desc">Price: High to Low</option>
+                      <option value="time">Prep Time</option>
+                    </select>
+                    <svg
+                      className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-foreground/60"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path d="M10 12l-4-4h8l-4 4z" />
+                    </svg>
+                  </label>
+                </div>
 
-              {/* Search + Sort */}
-              <div className="flex flex-col sm:flex-row gap-3">
-                <label className="relative flex-1 min-w-[220px]">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-foreground/60" />
-                  <input
-                    type="text"
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                    placeholder="Search drinks & pastries…"
-                    className="w-full pl-10 pr-3 py-2 rounded-xl bg-background/40 border border-white/10 text-foreground placeholder:text-foreground/60 focus:outline-none focus:ring-2 focus:ring-cream"
-                    aria-label="Search menu"
-                  />
-                </label>
-
-                <label className="relative">
-                  <span className="sr-only">Sort by</span>
-                  <div className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2">
-                    <SlidersHorizontal className="h-4 w-4 text-foreground/60" />
-                  </div>
-                  <select
-                    value={sort}
-                    onChange={(e) => setSort(e.target.value as SortKey)}
-                    className="appearance-none pl-10 pr-8 py-2 rounded-xl bg-background/40 border border-white/10 text-foreground focus:outline-none focus:ring-2 focus:ring-cream"
-                  >
-                    <option value="popular">Popular</option>
-                    <option value="price-asc">Price: Low to High</option>
-                    <option value="price-desc">Price: High to Low</option>
-                    <option value="time">Prep Time</option>
-                  </select>
-                  <svg
-                    className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-foreground/60"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path d="M10 12l-4-4h8l-4 4z" />
-                  </svg>
-                </label>
+                {/* Row 2: Category chips (independent, scrollable) */}
+                <div
+                  className="flex gap-2 overflow-x-auto -mx-1 px-1"
+                  style={{
+                    WebkitMaskImage:
+                      "linear-gradient(to right, transparent 0, black 16px, black calc(100% - 16px), transparent 100%)",
+                    maskImage:
+                      "linear-gradient(to right, transparent 0, black 16px, black calc(100% - 16px), transparent 100%)",
+                  }}
+                >
+                  {categories.map((c) => {
+                    const active = c === activeCat;
+                    return (
+                      <button
+                        key={c}
+                        onClick={() => setActiveCat(c)}
+                        className={`shrink-0 px-3 py-1.5 rounded-full text-sm font-medium transition-all ${
+                          active
+                            ? "bg-coffee-medium text-cream shadow-sm"
+                            : "bg-card text-foreground hover:bg-coffee-light/20"
+                        }`}
+                        aria-pressed={active}
+                      >
+                        {c}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </div>

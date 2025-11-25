@@ -6,13 +6,15 @@ import { Badge } from "./badge";
 import { motion } from "framer-motion";
 import { addToCart } from "@/lib/cartBus";
 
-/* ------- Card (polished visuals, skeleton image, chips) ------- */
+/* ------- Card (with fit + transparent text area) ------- */
 const MenuCard: React.FC<{ item: MenuItem }> = ({ item }) => {
+  const [loaded, setLoaded] = React.useState(false);
   const priceToNumber = (p: string) => {
     const n = parseFloat(p.replace(/[^0-9.]/g, ""));
     return Number.isFinite(n) ? n : 0;
   };
-  const [loaded, setLoaded] = React.useState(false);
+  // Use contain for tall glass images (shakes), cover for normal ones
+  const isContain = item.fit === "Contain";
 
   const handleAddToCart = React.useCallback(() => {
     addToCart({
@@ -24,15 +26,19 @@ const MenuCard: React.FC<{ item: MenuItem }> = ({ item }) => {
   }, [item.id, item.name, item.price, item.image]);
 
   return (
-    <Card className="group hover:shadow-warm transition-all duration-500 overflow-hidden border border-white/10 bg-card/80 backdrop-blur-sm rounded-2xl">
-      <div className="relative overflow-hidden">
+    <Card className="group transition-all duration-300 overflow-hidden border border-white/10 bg-background/40 rounded-2xl hover:shadow-lg hover:-translate-y-1">
+      <div className="relative overflow-hidden bg-gradient-to-b from-background/40 to-background/10">
+        {/* Skeleton while image loads */}
         {!loaded && (
           <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-background/40 to-background/20" />
         )}
+
         <img
           src={item.image}
           alt={item.name}
-          className={`w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110 ${
+          className={`w-full ${
+            isContain ? "h-81 object-contain" : "h-52 object-cover"
+          } transition-transform duration-500 group-hover:scale-105 ${
             loaded ? "opacity-100" : "opacity-0"
           }`}
           onLoad={() => setLoaded(true)}
@@ -40,8 +46,8 @@ const MenuCard: React.FC<{ item: MenuItem }> = ({ item }) => {
           decoding="async"
         />
 
-        {/* Rating */}
-        <div className="absolute top-4 left-4 bg-card/90 backdrop-blur-sm rounded-full px-2.5 py-1 border border-white/10">
+        {/* Rating pill */}
+        <div className="absolute top-4 left-4 bg-card/90 rounded-full px-2.5 py-1 border border-white/10">
           <div className="flex items-center gap-1 text-sm">
             <Star
               className="h-4 w-4 fill-yellow-400 text-yellow-400"
@@ -51,8 +57,8 @@ const MenuCard: React.FC<{ item: MenuItem }> = ({ item }) => {
           </div>
         </div>
 
-        {/* Price */}
-        <div className="absolute top-4 right-4 rounded-full bg-coffee-medium text-cream px-3 py-1.5 text-sm font-semibold shadow-soft">
+        {/* Price pill */}
+        <div className="absolute top-4 right-4 rounded-full bg-coffee-medium text-cream px-3 py-1.5 text-sm font-semibold shadow-sm">
           {item.price}
         </div>
 
@@ -67,14 +73,10 @@ const MenuCard: React.FC<{ item: MenuItem }> = ({ item }) => {
             </Badge>
           ))}
         </div>
-
-        {/* Corner gradient on hover */}
-        <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-          <div className="absolute inset-0 bg-gradient-to-tr from-black/0 via-black/0 to-black/20" />
-        </div>
       </div>
 
-      <CardContent className="p-6">
+      {/* Transparent-ish text area */}
+      <CardContent className="p-6 bg-transparent border-t border-white/10">
         <div className="flex justify-between items-start mb-3">
           <h3 className="text-xl font-semibold text-coffee-rich group-hover:text-coffee-medium transition-colors duration-300">
             {item.name}
@@ -100,19 +102,20 @@ const MenuCard: React.FC<{ item: MenuItem }> = ({ item }) => {
             </div>
           </div>
 
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <button
             className="bg-coffee-medium hover:bg-coffee-rich text-cream px-4 py-2 rounded-full font-medium transition-colors duration-300"
             aria-label={`Add ${item.name} to order`}
             onClick={handleAddToCart}
           >
             Add to Order
-          </motion.button>
+          </button>
         </div>
       </CardContent>
     </Card>
   );
 };
+
+// Keep memoization to avoid unnecessary re-renders
+const MemoMenuCard = React.memo(MenuCard);
 
 export default MenuCard;

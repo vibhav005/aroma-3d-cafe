@@ -1,11 +1,11 @@
 // src/features/menu/menu-types.ts
 export type Category =
   | "Coffee"
-  | "Pastries"
   | "Cold Coffee"
   | "Tea"
   | "Iced Tea"
   | "Shakes"
+  | "Mojitos"
   | "Brunch"
   | "Desserts";
 
@@ -19,16 +19,17 @@ export type MenuItem = {
   rating: number;
   time: string; // "3 mins" | "Ready"
   tags: string[];
+  fit?: "Cover" | "Contain";
 };
 
 export const categories: readonly ("All" | Category)[] = [
   "All",
   "Coffee",
-  "Pastries",
   "Cold Coffee",
   "Tea",
   "Iced Tea",
   "Shakes",
+  "Mojitos",
   "Brunch",
   "Desserts",
 ] as const;

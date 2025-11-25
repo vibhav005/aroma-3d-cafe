@@ -1,8 +1,10 @@
 // src/features/menu/menu-data.ts
 import type { MenuItem } from "./menuTypes";
 import { coffeeImages /*foodImages*/ } from "./menuImages";
+import { Coffee } from "lucide-react";
 
 export const menuItems: MenuItem[] = [
+  // ============= Coffee Items =================
   {
     id: 1,
     name: "Chill Vietnamese",
@@ -13,6 +15,7 @@ export const menuItems: MenuItem[] = [
     rating: 4.9,
     time: "3 mins",
     tags: ["Popular", "Signature"],
+    fit: "Contain",
   },
   {
     id: 2,
@@ -24,6 +27,7 @@ export const menuItems: MenuItem[] = [
     rating: 4.9,
     time: "1 min",
     tags: ["Refreshing", "Strong"],
+    fit: "Contain",
   },
   {
     id: 3,
@@ -36,6 +40,7 @@ export const menuItems: MenuItem[] = [
     rating: 4.8,
     time: "3 mins",
     tags: ["Classic", "Traditional"],
+    fit: "Contain",
   },
   {
     id: 4,
@@ -48,6 +53,7 @@ export const menuItems: MenuItem[] = [
     rating: 4.8,
     time: "3 mins",
     tags: ["Refreshing", "Chilled"],
+    fit: "Contain",
   },
   {
     id: 5,
@@ -60,6 +66,7 @@ export const menuItems: MenuItem[] = [
     rating: 4.8,
     time: "3 mins",
     tags: ["Refreshing", "Strong"],
+    fit: "Contain",
   },
   {
     id: 6,
@@ -72,6 +79,7 @@ export const menuItems: MenuItem[] = [
     rating: 4.8,
     time: "3 mins",
     tags: ["Creamy", "Icy"],
+    fit: "Contain",
   },
   {
     id: 7,
@@ -84,6 +92,7 @@ export const menuItems: MenuItem[] = [
     rating: 4.8,
     time: "3 mins",
     tags: ["Creamy", "Icy"],
+    fit: "Contain",
   },
   {
     id: 8,
@@ -96,6 +105,7 @@ export const menuItems: MenuItem[] = [
     rating: 4.8,
     time: "3 mins",
     tags: ["Creamy", "Icy"],
+    fit: "Contain",
   },
   {
     id: 9,
@@ -108,6 +118,7 @@ export const menuItems: MenuItem[] = [
     rating: 4.8,
     time: "3 mins",
     tags: ["Creamy", "Icy"],
+    fit: "Contain",
   },
   {
     id: 10,
@@ -120,6 +131,7 @@ export const menuItems: MenuItem[] = [
     rating: 4.8,
     time: "3 mins",
     tags: ["Creamy", "Icy"],
+    fit: "Contain",
   },
   {
     id: 11,
@@ -132,6 +144,7 @@ export const menuItems: MenuItem[] = [
     rating: 4.8,
     time: "3 mins",
     tags: ["Smooth", "Warm"],
+    fit: "Contain",
   },
   {
     id: 12,
@@ -144,6 +157,7 @@ export const menuItems: MenuItem[] = [
     rating: 4.8,
     time: "3 mins",
     tags: ["Smooth", "Warm"],
+    fit: "Contain",
   },
   {
     id: 13,
@@ -156,6 +170,7 @@ export const menuItems: MenuItem[] = [
     rating: 4.8,
     time: "3 mins",
     tags: ["Whiskey", "Warm"],
+    fit: "Contain",
   },
   {
     id: 14,
@@ -168,6 +183,7 @@ export const menuItems: MenuItem[] = [
     rating: 4.8,
     time: "3 mins",
     tags: ["Classic", "Warm"],
+    fit: "Contain",
   },
   {
     id: 15,
@@ -180,6 +196,7 @@ export const menuItems: MenuItem[] = [
     rating: 4.8,
     time: "3 mins",
     tags: ["Creamy", "Warm"],
+    fit: "Contain",
   },
   {
     id: 16,
@@ -192,6 +209,7 @@ export const menuItems: MenuItem[] = [
     rating: 4.8,
     time: "3 mins",
     tags: ["Fizzy", "Icy"],
+    fit: "Contain",
   },
   {
     id: 17,
@@ -204,6 +222,7 @@ export const menuItems: MenuItem[] = [
     rating: 4.8,
     time: "3 mins",
     tags: ["Fizzy", "Icy"],
+    fit: "Contain",
   },
   {
     id: 18,
@@ -216,6 +235,7 @@ export const menuItems: MenuItem[] = [
     rating: 4.8,
     time: "3 mins",
     tags: ["Fizzy", "Icy"],
+    fit: "Contain",
   },
   {
     id: 19,
@@ -228,19 +248,256 @@ export const menuItems: MenuItem[] = [
     rating: 4.8,
     time: "3 mins",
     tags: ["Cintrus", "Icy"],
+    fit: "Contain",
   },
 
-  //   {
-  //     id: 5,
-  //     name: "Artisan Croissant",
-  //     description:
-  //       "Buttery, flaky pastry baked fresh daily with premium ingredients",
-  //     price: "$3.25",
-  //     image: foodImages.pastries,
-  //     category: "Pastries",
-  //     rating: 4.8,
-  //     time: "2 mins",
-  //     tags: ["Fresh Baked", "Organic"],
-  //   },
-  // ...rest of items
+  //   ================= Tea Items =================
+  {
+    id: 20,
+    name: "Masala Tea",
+    description:
+      "Creamy tea infused with rich, warming Masala spices. Sweet, fragrant, and perfectly comforting.",
+    price: "$4.00",
+    image: coffeeImages.masalaTea,
+    category: "Tea",
+    rating: 4.8,
+    time: "3 mins",
+    tags: ["Creamy", "Warm"],
+    fit: "Contain",
+  },
+  {
+    id: 21,
+    name: "Blueberry Iced Tea",
+    description:
+      "Sweet blueberry meets crisp iced tea. Vibrant, fruity, and intensely refreshing.",
+    price: "$4.00",
+    image: coffeeImages.blueBerryIcedTea,
+    category: "Iced Tea",
+    rating: 4.8,
+    time: "3 mins",
+    tags: ["Fruity", "Icy"],
+    fit: "Contain",
+  },
+  {
+    id: 22,
+    name: "Lemon Tea",
+    description:
+      "Classic tea infused with fresh, zesty lemon. A perfect balance of warmth and bright, clean flavor.",
+    price: "$4.00",
+    image: coffeeImages.lemonTea,
+    category: "Tea",
+    rating: 4.8,
+    time: "3 mins",
+    tags: ["Zesty", "warm"],
+    fit: "Contain",
+  },
+  {
+    id: 23,
+    name: "Litchi Iced Tea",
+    description:
+      "Chilled tea kissed with the sweet, fragrant taste of litchi. Perfectly refreshing summer delight.",
+    price: "$4.00",
+    image: coffeeImages.litchiIcedTea,
+    category: "Iced Tea",
+    rating: 4.8,
+    time: "3 mins",
+    tags: ["Delightful", "Icy"],
+    fit: "Contain",
+  },
+  {
+    id: 23,
+    name: "Black Tea",
+    description:
+      "The traditional, rich essence of fully oxidized tea leaves. A bold and perfectly warm cup of clarity.",
+    price: "$4.00",
+    image: coffeeImages.blackTea,
+    category: "Tea",
+    rating: 4.8,
+    time: "3 mins",
+    tags: ["Traditional", "Warm"],
+    fit: "Contain",
+  },
+  {
+    id: 24,
+    name: "Saffron Kahwa",
+    description:
+      "Kashmiri saffron and green tea. A golden, aromatic, and intensely soothing infusion.",
+    price: "$4.00",
+    image: coffeeImages.saffronKahwa,
+    category: "Tea",
+    rating: 4.8,
+    time: "3 mins",
+    tags: ["Traditional", "Warm"],
+    fit: "Contain",
+  },
+  {
+    id: 25,
+    name: "Lemon Ginger Tea",
+    description: "The fiery warmth of ginger meets bright, sharp lemon zest.",
+    price: "$4.00",
+    image: coffeeImages.lemonGingerTea,
+    category: "Tea",
+    rating: 4.8,
+    time: "3 mins",
+    tags: ["Zesty", "Warm"],
+    fit: "Contain",
+  },
+  {
+    id: 26,
+    name: "Grenadine Iced Tea",
+    description:
+      "Iced tea with a sweet ruby splash of grenadine. Vibrant, fruity, and instantly refreshing.",
+    price: "$4.00",
+    image: coffeeImages.grenadineIcedTea,
+    category: "Iced Tea",
+    rating: 4.8,
+    time: "3 mins",
+    tags: ["Grenadine", "Icy"],
+    fit: "Contain",
+  },
+  {
+    id: 27,
+    name: "Lemon Iced Tea",
+    description:
+      "The classic pairing of cool tea and sharp, zesty lemon. Perfectly simple, thirst-quenching, and utterly crisp.",
+    price: "$4.00",
+    image: coffeeImages.lemonIcedTea,
+    category: "Iced Tea",
+    rating: 4.8,
+    time: "3 mins",
+    tags: ["Zesty", "Icy"],
+    fit: "Contain",
+  },
+
+  // ============= Shakes =================
+  {
+    id: 28,
+    name: "Berry Burst",
+    description:
+      "Indulgent sweetness blended with a burst of sweet blueberries. A thick, frosty, and utterly creamy.",
+    price: "$4.00",
+    image: coffeeImages.berryBurst,
+    category: "Shakes",
+    rating: 4.8,
+    time: "3 mins",
+    tags: ["Thick", "Icy"],
+    fit: "Contain",
+  },
+  {
+    id: 29,
+    name: "Tropical Chill",
+    description:
+      "Creamy base meets tangy tropical pineapple. A frosty, sweet, island indulgence.",
+    price: "$4.00",
+    image: coffeeImages.tropicalChill,
+    category: "Shakes",
+    rating: 4.8,
+    time: "3 mins",
+    tags: ["Thick", "Icy"],
+    fit: "Contain",
+  },
+  {
+    id: 30,
+    name: "Blushing Berry",
+    description:
+      "Thick, velvety blend of ice cream and strawberries. A perfectly sweet, fruity, and nostalgic treat.",
+    price: "$4.00",
+    image: coffeeImages.blushingBerry,
+    category: "Shakes",
+    rating: 4.8,
+    time: "3 mins",
+    tags: ["Thick", "Icy"],
+    fit: "Contain",
+  },
+  {
+    id: 31,
+    name: "Tropical Sunshine",
+    description:
+      "The essence of tropical summer blended thick and smooth. Rich mango flavor in a creamy shake.",
+    price: "$4.00",
+    image: coffeeImages.tropicalSunshine,
+    category: "Shakes",
+    rating: 4.8,
+    time: "3 mins",
+    tags: ["Thick", "Icy"],
+    fit: "Contain",
+  },
+  {
+    id: 32,
+    name: "Crunchy Choco Delight (KitKat)",
+    description:
+      "Chocolate shake with real Kit Kat pieces. Creamy indulgence with a crunchy wafer break.",
+    price: "$4.00",
+    image: coffeeImages.crunchyChocoDelight,
+    category: "Shakes",
+    rating: 4.8,
+    time: "3 mins",
+    tags: ["Thick", "Icy"],
+    fit: "Contain",
+  },
+  {
+    id: 33,
+    name: "Cookie Crumble (Oreo)",
+    description:
+      "The ultimate cookies-and-cream. A thick, cold shake with chunks of crunchy chocolate wafer.",
+    price: "$4.00",
+    image: coffeeImages.cookieCrumble,
+    category: "Shakes",
+    rating: 4.8,
+    time: "3 mins",
+    tags: ["Thick", "Icy"],
+    fit: "Contain",
+  },
+  {
+    id: 34,
+    name: "Golden Nut Bliss (Ferrero)",
+    description:
+      "Velvety chocolate and hazelnut blend. A rich, cold treat with a satisfying nutty crunch.",
+    price: "$4.00",
+    image: coffeeImages.goldenNutBliss,
+    category: "Shakes",
+    rating: 4.8,
+    time: "3 mins",
+    tags: ["Thick", "Icy"],
+    fit: "Contain",
+  },
+  {
+    id: 35,
+    name: "Spiced Biscuit Bliss (Biscoff)",
+    description:
+      "Creamy shake with caramelized Biscoff spice. Thick, frosty, and loaded with cookie crunch.",
+    price: "$4.00",
+    image: coffeeImages.spicedBiscuitBliss,
+    category: "Shakes",
+    rating: 4.8,
+    time: "3 mins",
+    tags: ["Thick", "Icy"],
+    fit: "Contain",
+  },
+  {
+    id: 36,
+    name: "Choco Island Freak Shake",
+    description:
+      "Chocolate overload and dripping with sprinkles. The thick, dark shake with an Oreo and Kit Kat.",
+    price: "$4.00",
+    image: coffeeImages.chocoIslandFreakShake,
+    category: "Shakes",
+    rating: 4.8,
+    time: "3 mins",
+    tags: ["Thick", "Icy"],
+    fit: "Contain",
+  },
+  {
+    id: 37,
+    name: "Brownie Shake",
+    description:
+      "Decadent chocolate meets fudgy brownie chunks. A rich, frosty shake with a satisfying chew.",
+    price: "$4.00",
+    image: coffeeImages.brownieShake,
+    category: "Shakes",
+    rating: 4.8,
+    time: "3 mins",
+    tags: ["Thick", "Icy"],
+    fit: "Contain",
+  },
 ];
