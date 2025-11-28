@@ -1,13 +1,25 @@
 // src/features/menu/menu-types.ts
 export type Category =
-  | "Coffee"
+  | "Speciality Coffee"
   | "Cold Coffee"
-  | "Tea"
+  | "Hot Coffee"
+  | "Hot Chocolate"
+  | "Hot Tea"
   | "Iced Tea"
   | "Shakes"
   | "Mojitos"
   | "Brunch"
   | "Desserts";
+
+export type MenuVariant = {
+  name: string;
+  price: string;
+};
+
+export type AddOns = {
+  name: string;
+  price: string;
+};
 
 export type MenuItem = {
   id: number;
@@ -20,13 +32,17 @@ export type MenuItem = {
   time: string; // "3 mins" | "Ready"
   tags: string[];
   fit?: "Cover" | "Contain";
+  variants?: MenuVariant[];
+  addOns?: AddOns[];
 };
 
 export const categories: readonly ("All" | Category)[] = [
   "All",
-  "Coffee",
+  "Speciality Coffee",
   "Cold Coffee",
-  "Tea",
+  "Hot Coffee",
+  "Hot Chocolate",
+  "Hot Tea",
   "Iced Tea",
   "Shakes",
   "Mojitos",

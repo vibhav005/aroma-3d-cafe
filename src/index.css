@@ -51,17 +51,29 @@ All colors MUST be HSL.
     --sage: 90 20% 65%;
     --sage-light: 90 25% 75%;
     --warm-white: 30 15% 97%;
-    
+
     /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(var(--coffee-rich)), hsl(var(--coffee-medium)));
-    --gradient-warm: linear-gradient(180deg, hsl(var(--warm-white)), hsl(var(--cream)));
-    --gradient-sage: linear-gradient(135deg, hsl(var(--sage-light)), hsl(var(--sage)));
-    
+    --gradient-hero: linear-gradient(
+      135deg,
+      hsl(var(--coffee-rich)),
+      hsl(var(--coffee-medium))
+    );
+    --gradient-warm: linear-gradient(
+      180deg,
+      hsl(var(--warm-white)),
+      hsl(var(--cream))
+    );
+    --gradient-sage: linear-gradient(
+      135deg,
+      hsl(var(--sage-light)),
+      hsl(var(--sage))
+    );
+
     /* Shadows */
     --shadow-soft: 0 4px 20px hsl(25 15% 15% / 0.08);
     --shadow-warm: 0 8px 30px hsl(25 50% 35% / 0.12);
     --shadow-floating: 0 10px 40px hsl(25 15% 15% / 0.15);
-    
+
     /* Animations */
     --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-spring: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -115,7 +127,7 @@ All colors MUST be HSL.
     --border: 20 20% 22%;
     --input: 20 20% 22%;
     --ring: 30 35% 75%;
-    
+
     /* Dark Mode Custom Tokens */
     --coffee-rich: 25 60% 70%;
     --coffee-medium: 30 45% 60%;
@@ -124,9 +136,17 @@ All colors MUST be HSL.
     --sage: 90 25% 55%;
     --sage-light: 90 20% 45%;
     --warm-white: 20 20% 8%;
-    
-    --gradient-hero: linear-gradient(135deg, hsl(var(--coffee-medium)), hsl(var(--coffee-rich)));
-    --gradient-warm: linear-gradient(180deg, hsl(var(--warm-white)), hsl(var(--cream)));
+
+    --gradient-hero: linear-gradient(
+      135deg,
+      hsl(var(--coffee-medium)),
+      hsl(var(--coffee-rich))
+    );
+    --gradient-warm: linear-gradient(
+      180deg,
+      hsl(var(--warm-white)),
+      hsl(var(--cream))
+    );
     --shadow-soft: 0 4px 20px hsl(0 0% 0% / 0.25);
     --shadow-warm: 0 8px 30px hsl(0 0% 0% / 0.35);
     --shadow-floating: 0 10px 40px hsl(0 0% 0% / 0.4);
@@ -193,8 +213,13 @@ All colors MUST be HSL.
   }
 
   @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
   }
 
   /* Parallax Container */
@@ -223,13 +248,125 @@ All colors MUST be HSL.
   }
 
   @keyframes steam {
-    0%, 100% { 
+    0%,
+    100% {
       transform: translateY(0) scale(1);
       opacity: 0.7;
     }
-    50% { 
+    50% {
       transform: translateY(-10px) scale(1.1);
       opacity: 0.3;
     }
   }
+}
+
+/* =======================================
+   PREMIUM SMOOTH POP-IN / POP-OUT
+======================================= */
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.88) translateY(12px);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  }
+  45% {
+    opacity: 1;
+    transform: scale(1.04) translateY(-1px);
+    filter: drop-shadow(0 10px 28px rgba(0, 0, 0, 0.18));
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0px);
+    filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.14));
+  }
+}
+
+.animate-popIn {
+  animation: popIn 260ms cubic-bezier(0.22, 0.65, 0.28, 1) forwards;
+}
+
+@keyframes popOut {
+  0% {
+    opacity: 1;
+    transform: scale(1) translateY(0px);
+    filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.14));
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.92) translateY(14px);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.06));
+  }
+}
+
+.animate-popOut {
+  animation: popOut 210ms cubic-bezier(0.3, 0.58, 0.24, 1) forwards;
+}
+
+/* =======================================
+   SMOOTH BACKDROP FADE
+======================================= */
+
+@keyframes fadeBg {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-fadeBg {
+  animation: fadeBg 260ms ease-out forwards;
+}
+
+@keyframes fadeBgOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.animate-fadeBgOut {
+  animation: fadeBgOut 200ms ease-out forwards;
+}
+
+/* =======================================
+   SUPER-SMOOTH SLIDE-IN-UP / SLIDE-OUT-DOWN
+======================================= */
+
+@keyframes slideInUp {
+  0% {
+    opacity: 0;
+    transform: translate(calc(-50% - 40px), 18px) scale(0.94);
+  }
+  55% {
+    opacity: 1;
+    transform: translate(calc(-50% - 40px), -2px) scale(1.03);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(calc(-50% - 40px), 0px) scale(1);
+  }
+}
+
+.animate-slideInUp {
+  animation: slideInUp 260ms cubic-bezier(0.22, 0.65, 0.28, 1) forwards;
+}
+
+@keyframes slideOutDown {
+  0% {
+    opacity: 1;
+    transform: translate(calc(-50% - 40px), 0px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% - 40px), 18px) scale(0.94);
+  }
+}
+
+.animate-slideOutDown {
+  animation: slideOutDown 210ms cubic-bezier(0.3, 0.58, 0.24, 1) forwards;
 }

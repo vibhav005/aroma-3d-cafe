@@ -18,6 +18,9 @@ import cokeEspresso from "@/assets/coffee/coke_espresso.jpg";
 import redBullEspresso from "@/assets/coffee/redbull_espresso.jpg";
 import gingerAle from "@/assets/coffee/ginger_ale.jpg";
 import orangeSunrise from "@/assets/coffee/orange_sunrise.jpg";
+import hotChocolate from "@/assets/coffee/hot_chocolate.jpg";
+import frenchVelvet from "@/assets/coffee/french_velvet.jpg";
+import tonicWaterEspresso from "@/assets/coffee/tonic_water_espresso.jpg";
 
 // Tea Images (hot and iced)
 import masalaTea from "@/assets/tea/masala_tea.jpg";
@@ -42,8 +45,23 @@ import goldenNutBliss from "@/assets/shakes/golden_nut_bliss_(Ferrero).jpg";
 import spicedBiscuitBliss from "@/assets/shakes/spiced_biscuit_bliss_(Biscoff).jpg";
 import chocoIslandFreakShake from "@/assets/shakes/choco_island_freak_shake.jpg";
 import brownieShake from "@/assets/shakes/brownie_shake.jpg";
+
+// Mojitos Images
+import blueberry from "@/assets/mojitos/blueberry .jpg";
+import coolBlue from "@/assets/mojitos/cool_blue.jpg";
+import greenApple from "@/assets/mojitos/green_apple.jpg";
+import grenadine from "@/assets/mojitos/grenadine.jpg";
+import litchi from "@/assets/mojitos/litchi.jpg";
+import watermelon from "@/assets/mojitos/watermelon.jpg";
+
+// Desserts Images
+import biscoffCake from "@/assets/desserts/biscoff.jpg";
+import blueberryCake from "@/assets/desserts/blueberry_cheesecake.jpg";
+import brownie from "@/assets/desserts/brownie_cake.jpg";
+import newYorkCheesecake from "@/assets/desserts/new_york_cheesecake.jpg";
+import sizzling from "@/assets/desserts/sizzling.jpg";
 export const coffeeImages = {
-  //Coffe
+  //Coffee
   chillVietnamese,
   classicCappuccino,
   affogato,
@@ -63,6 +81,9 @@ export const coffeeImages = {
   redBullEspresso,
   gingerAle,
   orangeSunrise,
+  hotChocolate,
+  frenchVelvet,
+  tonicWaterEspresso,
 
   //Tea Images
   masalaTea,
@@ -87,6 +108,21 @@ export const coffeeImages = {
   spicedBiscuitBliss,
   chocoIslandFreakShake,
   brownieShake,
+
+  //Mojitos Images
+  blueberry,
+  coolBlue,
+  greenApple,
+  grenadine,
+  litchi,
+  watermelon,
+
+  //Desserts Images
+  biscoffCake,
+  blueberryCake,
+  brownie,
+  newYorkCheesecake,
+  sizzling,
 };
 
 // export const foodImages = {
