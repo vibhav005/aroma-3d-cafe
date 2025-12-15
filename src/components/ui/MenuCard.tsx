@@ -1,47 +1,34 @@
-import React from "react";
-import { AddOns, MenuItem, MenuVariant } from "@/features/menu/menuTypes";
-import { Card, CardContent } from "./card";
-import { Clock, Leaf, Star, ChevronDown } from "lucide-react";
-import { Badge } from "./badge";
 import Portal from "@/components/Portal";
+import { AddOns, MenuItem, MenuVariant } from "@/features/menu/menuTypes";
 import { addToCart } from "@/lib/cartBus";
+import { ChevronDown, Clock, Leaf, Star } from "lucide-react";
+import React from "react";
+import { Card, CardContent } from "./card";
 
 const POPOVER_WIDTH = 260;
 
 const MenuCard: React.FC<{ item: MenuItem }> = ({ item }) => {
   const [loaded, setLoaded] = React.useState(false);
-  const [selectedVariant, setSelectedVariant] =
-    React.useState<MenuVariant | null>(null);
+  const [selectedVariant, setSelectedVariant] = React.useState<MenuVariant | null>(null);
   const [selectedAddOns, setSelectedAddOns] = React.useState<AddOns[]>([]);
   const [open, setOpen] = React.useState(false);
   const [openUp, setOpenUp] = React.useState(false);
   const buttonRef = React.useRef<HTMLButtonElement>(null);
   const [popoverPos, setPopoverPos] = React.useState({ top: 0, left: 0 });
 
-  const priceToNumber = (p: string) =>
-    Number(parseFloat(p.replace(/[^0-9.]/g, "")) || 0);
+  const priceToNumber = (p: string) => Number(parseFloat(p.replace(/[^0-9.]/g, "")) || 0);
 
   const computeTotal = () => {
-    const base =
-      selectedVariant !== null
-        ? priceToNumber(selectedVariant.price)
-        : priceToNumber(item.price);
+    const base = selectedVariant !== null ? priceToNumber(selectedVariant.price) : priceToNumber(item.price);
 
-    const addOnsTotal = selectedAddOns.reduce(
-      (sum, add) => sum + priceToNumber(add.price),
-      0
-    );
+    const addOnsTotal = selectedAddOns.reduce((sum, add) => sum + priceToNumber(add.price), 0);
 
     return base + addOnsTotal;
   };
 
   const buildCartName = () => {
-    const base = selectedVariant
-      ? `${item.name} - ${selectedVariant.name}`
-      : item.name;
-    const extras = selectedAddOns.length
-      ? ` + ${selectedAddOns.map((a) => a.name).join(", ")}`
-      : "";
+    const base = selectedVariant ? `${item.name} - ${selectedVariant.name}` : item.name;
+    const extras = selectedAddOns.length ? ` + ${selectedAddOns.map((a) => a.name).join(", ")}` : "";
     return base + extras;
   };
 
@@ -73,9 +60,7 @@ const MenuCard: React.FC<{ item: MenuItem }> = ({ item }) => {
 
   const toggleAddOn = (addon: AddOns) => {
     setSelectedAddOns((prev) =>
-      prev.some((a) => a.name === addon.name)
-        ? prev.filter((a) => a.name !== addon.name)
-        : [...prev, addon]
+      prev.some((a) => a.name === addon.name) ? prev.filter((a) => a.name !== addon.name) : [...prev, addon]
     );
   };
 
@@ -83,20 +68,14 @@ const MenuCard: React.FC<{ item: MenuItem }> = ({ item }) => {
     <Card className="group transition-all duration-300 overflow-hidden border border-white/10 bg-background/40 rounded-2xl hover:-translate-y-1 hover:shadow-xl">
       {/* ---------- IMAGE ---------- */}
       <div className="relative overflow-hidden">
-        {!loaded && (
-          <div className="absolute inset-0 animate-pulse bg-background/30" />
-        )}
+        {!loaded && <div className="absolute inset-0 animate-pulse bg-background/30" />}
 
         <img
           src={item.image}
           alt={item.name}
           onLoad={() => setLoaded(true)}
-          className={`w-full ${
-            item.fit === "Contain" ? "h-81 object-contain" : "h-52 object-cover"
-          }
-          transition-transform duration-500 group-hover:scale-105 ${
-            loaded ? "opacity-100" : "opacity-0"
-          }`}
+          className={`w-full ${item.fit === "Contain" ? "h-81 object-contain" : "h-52 object-cover"}
+          transition-transform duration-500 group-hover:scale-105 ${loaded ? "opacity-100" : "opacity-0"}`}
         />
 
         <div className="absolute top-4 left-4 bg-black/30 backdrop-blur-md border border-white/10 rounded-full px-2.5 py-1 text-white text-sm flex items-center gap-1">
@@ -113,9 +92,7 @@ const MenuCard: React.FC<{ item: MenuItem }> = ({ item }) => {
         {/* ---------- NAME + SELECT ---------- */}
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-2 flex-wrap">
-            <h3 className="text-xl font-semibold text-coffee-rich">
-              {item.name}
-            </h3>
+            <h3 className="text-xl font-semibold text-coffee-rich">{item.name}</h3>
 
             {item.variants && (
               <button
@@ -150,9 +127,7 @@ const MenuCard: React.FC<{ item: MenuItem }> = ({ item }) => {
                   width: POPOVER_WIDTH,
                   left: popoverPos.left,
                   transform: "translateX(-50%)",
-                  bottom: openUp
-                    ? window.innerHeight - popoverPos.top + 16
-                    : undefined,
+                  bottom: openUp ? window.innerHeight - popoverPos.top + 16 : undefined,
                   top: openUp ? undefined : popoverPos.top + 40,
                 }}
               >
@@ -163,9 +138,7 @@ const MenuCard: React.FC<{ item: MenuItem }> = ({ item }) => {
                     maxHeight: window.innerWidth > 640 ? "260px" : "200px",
                   }}
                 >
-                  <p className="text-xs text-muted-foreground mt-1 mb-1">
-                    Select Flavour
-                  </p>
+                  <p className="text-xs text-muted-foreground mt-1 mb-1">Select Flavour</p>
 
                   {/* ---------- VARIANTS ---------- */}
                   {item.variants.map((v) => (
@@ -179,22 +152,16 @@ const MenuCard: React.FC<{ item: MenuItem }> = ({ item }) => {
                       }`}
                     >
                       <span>{v.name}</span>
-                      <span className="ml-auto text-xs opacity-70">
-                        {v.price}
-                      </span>
+                      <span className="ml-auto text-xs opacity-70">{v.price}</span>
                     </button>
                   ))}
 
                   {/* ---------- ADD-ONS ---------- */}
                   {item.addOns && (
                     <>
-                      <p className="text-xs text-muted-foreground mt-3 mb-1">
-                        Add-ons (optional)
-                      </p>
+                      <p className="text-xs text-muted-foreground mt-3 mb-1">Add-ons (optional)</p>
                       {item.addOns.map((a) => {
-                        const active = selectedAddOns.some(
-                          (s) => s.name === a.name
-                        );
+                        const active = selectedAddOns.some((s) => s.name === a.name);
                         return (
                           <button
                             key={a.name}
@@ -207,15 +174,11 @@ const MenuCard: React.FC<{ item: MenuItem }> = ({ item }) => {
                           >
                             <div
                               className={`w-3 h-3 rounded-full ${
-                                active
-                                  ? "bg-green-500"
-                                  : "bg-transparent border border-white/40"
+                                active ? "bg-green-500" : "bg-transparent border border-white/40"
                               }`}
                             />
                             <span>{a.name}</span>
-                            <span className="ml-auto text-xs opacity-70">
-                              {a.price}
-                            </span>
+                            <span className="ml-auto text-xs opacity-70">{a.price}</span>
                           </button>
                         );
                       })}

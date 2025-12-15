@@ -8,7 +8,7 @@ export type Category =
   | "Iced Tea"
   | "Shakes"
   | "Mojitos"
-  | "Brunch"
+  | "Food"
   | "Desserts";
 
 export type MenuVariant = {
@@ -25,6 +25,7 @@ export type MenuItem = {
   id: number;
   name: string;
   description: string;
+  subtitle?: string;
   price: string; // "$4.50"
   image: string; // or `string | StaticImport` if using Next/Image
   category: Category;
@@ -46,6 +47,6 @@ export const categories: readonly ("All" | Category)[] = [
   "Iced Tea",
   "Shakes",
   "Mojitos",
-  "Brunch",
+  "Food",
   "Desserts",
 ] as const;

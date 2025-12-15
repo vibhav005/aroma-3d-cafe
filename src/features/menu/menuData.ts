@@ -1,6 +1,6 @@
 // src/features/menu/menu-data.ts
+import { coffeeImages /*foodImages*/, foodImages } from "./menuImages";
 import type { MenuItem } from "./menuTypes";
-import { coffeeImages /*foodImages*/ } from "./menuImages";
 
 export const menuItems: MenuItem[] = [
   // ============= Coffee Items =================
@@ -33,8 +33,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 3,
     name: "Velvet Brew",
-    description:
-      "Traditional Italian cappuccino with perfect foam to espresso ratio",
+    description: "Traditional Italian cappuccino with perfect foam to espresso ratio",
     price: "₹169",
     image: coffeeImages.classicCappuccino,
     category: "Hot Coffee",
@@ -54,8 +53,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 4,
     name: "Chilled Brew",
-    description:
-      "Rich espresso shots diluted with cold water. A perfectly crisp and refreshing cool-down.",
+    description: "Rich espresso shots diluted with cold water. A perfectly crisp and refreshing cool-down.",
     price: "179",
     image: coffeeImages.icedAmericano,
     category: "Speciality Coffee",
@@ -67,8 +65,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 5,
     name: "Italian Kick",
-    description:
-      "A bold, concentrated shot of tradition for an instant, powerful jolt of energy.",
+    description: "A bold, concentrated shot of tradition for an instant, powerful jolt of energy.",
     price: "₹129",
     image: coffeeImages.italianKick,
     category: "Hot Coffee",
@@ -82,8 +79,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 6,
     name: "Classic Chill",
-    description:
-      "A rich, icy, and perfectly blended coffee beverage, crafted for sweet, creamy refreshment.",
+    description: "A rich, icy, and perfectly blended coffee beverage, crafted for sweet, creamy refreshment.",
     price: "₹169",
     image: coffeeImages.classicChill,
     category: "Cold Coffee",
@@ -107,8 +103,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 7,
     name: "Cocoa Dream",
-    description:
-      "A true Cocoa Dream deep, velvety, and exquisitely satisfying.",
+    description: "A true Cocoa Dream deep, velvety, and exquisitely satisfying.",
     price: "199",
     image: coffeeImages.cocoaDream,
     category: "Cold Coffee",
@@ -120,8 +115,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 8,
     name: "Cocoa Breeze",
-    description:
-      "The ultimate chocolate and coffee comfort: a cozy, creamy hug in a cup.",
+    description: "The ultimate chocolate and coffee comfort: a cozy, creamy hug in a cup.",
     price: "₹199",
     image: coffeeImages.cocoaBreeze,
     category: "Cold Coffee",
@@ -145,8 +139,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 9,
     name: "Velvet Chill",
-    description:
-      "Espresso and fresh cold milk over ice. The essential, smooth, and cool refreshment.",
+    description: "Espresso and fresh cold milk over ice. The essential, smooth, and cool refreshment.",
     price: "229",
     image: coffeeImages.velvetChill,
     category: "Speciality Coffee",
@@ -211,8 +204,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 13,
     name: "Whiskey Roast",
-    description:
-      "The bold kick of Irish whiskey and coffee. Intensely warm, served black (no cream).",
+    description: "The bold kick of Irish whiskey and coffee. Intensely warm, served black (no cream).",
     price: "219",
     image: coffeeImages.whiskeyRoasted,
     category: "Speciality Coffee",
@@ -239,8 +231,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 15,
     name: "Choco Bliss",
-    description:
-      "The perfect mix of espresso and melted chocolate. A rich, creamy, and decadent warm sip.",
+    description: "The perfect mix of espresso and melted chocolate. A rich, creamy, and decadent warm sip.",
     price: "₹229",
     image: coffeeImages.chocoBliss,
     category: "Hot Coffee",
@@ -258,8 +249,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 16,
     name: "Coke Espresso",
-    description:
-      "A bold shot poured into chilled Coke. Maximum caffeine, maximum fizz.",
+    description: "A bold shot poured into chilled Coke. Maximum caffeine, maximum fizz.",
     price: "239",
     image: coffeeImages.cokeEspresso,
     category: "Speciality Coffee",
@@ -271,8 +261,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 17,
     name: "Red Bull Espresso",
-    description:
-      "A bold shot poured into chilled Red Bull. Maximum caffeine, maximum fizz.",
+    description: "A bold shot poured into chilled Red Bull. Maximum caffeine, maximum fizz.",
     price: "249",
     image: coffeeImages.redBullEspresso,
     category: "Speciality Coffee",
@@ -297,8 +286,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 19,
     name: "Orange Sunrise",
-    description:
-      "A vibrant, layered blend capturing the hues of dawn. A beautiful start to your day.",
+    description: "A vibrant, layered blend capturing the hues of dawn. A beautiful start to your day.",
     price: "239",
     image: coffeeImages.orangeSunrise,
     category: "Speciality Coffee",
@@ -325,10 +313,9 @@ export const menuItems: MenuItem[] = [
   {
     id: 21,
     name: "Peach Ice Tea",
-    description:
-      "Sweet blueberry meets crisp iced tea. Vibrant, fruity, and intensely refreshing.",
+    description: "Sweet blueberry meets crisp iced tea. Vibrant, fruity, and intensely refreshing.",
     price: "169",
-    image: coffeeImages.blueBerryIcedTea,
+    image: coffeeImages.peachIcedTea,
     category: "Iced Tea",
     rating: 4.8,
     time: "3 mins",
@@ -377,8 +364,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 24,
     name: "Saffron Kahwa",
-    description:
-      "Kashmiri saffron and green tea. A golden, aromatic, and intensely soothing infusion.",
+    description: "Kashmiri saffron and green tea. A golden, aromatic, and intensely soothing infusion.",
     price: "189",
     image: coffeeImages.saffronKahwa,
     category: "Hot Tea",
@@ -407,10 +393,9 @@ export const menuItems: MenuItem[] = [
   {
     id: 26,
     name: "Blueberry Ice Tea",
-    description:
-      "Iced tea with a sweet ruby splash of grenadine. Vibrant, fruity, and instantly refreshing.",
+    description: "Iced tea with a sweet ruby splash of grenadine. Vibrant, fruity, and instantly refreshing.",
     price: "169",
-    image: coffeeImages.grenadineIcedTea,
+    image: coffeeImages.blueberryIcedTea,
     category: "Iced Tea",
     rating: 4.8,
     time: "3 mins",
@@ -453,8 +438,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 29,
     name: "Tropical Chill",
-    description:
-      "Creamy base meets tangy tropical pineapple. A frosty, sweet, island indulgence.",
+    description: "Creamy base meets tangy tropical pineapple. A frosty, sweet, island indulgence.",
     price: "199",
     image: coffeeImages.tropicalChill,
     category: "Shakes",
@@ -507,8 +491,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 32,
     name: "Crunchy Choco Delight (KitKat)",
-    description:
-      "Chocolate shake with real Kit Kat pieces. Creamy indulgence with a crunchy wafer break.",
+    description: "Chocolate shake with real Kit Kat pieces. Creamy indulgence with a crunchy wafer break.",
     price: "229",
     image: coffeeImages.crunchyChocoDelight,
     category: "Shakes",
@@ -543,8 +526,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 34,
     name: "Golden Nut Bliss (Ferrero)",
-    description:
-      "Velvety chocolate and hazelnut blend. A rich, cold treat with a satisfying nutty crunch.",
+    description: "Velvety chocolate and hazelnut blend. A rich, cold treat with a satisfying nutty crunch.",
     price: "229",
     image: coffeeImages.goldenNutBliss,
     category: "Shakes",
@@ -561,8 +543,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 35,
     name: "Spiced Biscuit Bliss (Biscoff)",
-    description:
-      "Creamy shake with caramelized Biscoff spice. Thick, frosty, and loaded with cookie crunch.",
+    description: "Creamy shake with caramelized Biscoff spice. Thick, frosty, and loaded with cookie crunch.",
     price: "279",
     image: coffeeImages.spicedBiscuitBliss,
     category: "Shakes",
@@ -617,8 +598,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 38,
     name: "Blueberry Mojito",
-    description:
-      "Crisp mint and zesty lime meet sweet, plump blueberries. Intensely cool and bubbly.",
+    description: "Crisp mint and zesty lime meet sweet, plump blueberries. Intensely cool and bubbly.",
     price: "$4.00",
     image: coffeeImages.blueberry,
     category: "Mojitos",
@@ -630,8 +610,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 39,
     name: "Cool Blue Mojito",
-    description:
-      "The classic mint and lime, electrified blue. Intensely cool, crisp, and ultra-bubbly.",
+    description: "The classic mint and lime, electrified blue. Intensely cool, crisp, and ultra-bubbly.",
     price: "$4.00",
     image: coffeeImages.coolBlue,
     category: "Mojitos",
@@ -643,8 +622,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 40,
     name: "Green Apple Mojito",
-    description:
-      "Mint and lime with a tart green apple kick. Crisp, cool, and utterly fizzy refreshment.",
+    description: "Mint and lime with a tart green apple kick. Crisp, cool, and utterly fizzy refreshment.",
     price: "$4.00",
     image: coffeeImages.greenApple,
     category: "Mojitos",
@@ -669,8 +647,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 42,
     name: "Litchi Mojito",
-    description:
-      "Mint and lime with sweet, exotic litchi. Fragrant, cool, and perfectly bubbly.",
+    description: "Mint and lime with sweet, exotic litchi. Fragrant, cool, and perfectly bubbly.",
     price: "$4.00",
     image: coffeeImages.litchi,
     category: "Mojitos",
@@ -682,8 +659,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 43,
     name: "Watermelon Mojito",
-    description:
-      "Invigorating mint and lime with a sweet watermelon burst. Perfectly cool, and refreshing.",
+    description: "Invigorating mint and lime with a sweet watermelon burst. Perfectly cool, and refreshing.",
     price: "$4.00",
     image: coffeeImages.watermelon,
     category: "Mojitos",
@@ -710,8 +686,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 45,
     name: "Blueberry Cheesecake",
-    description:
-      "Velvety cream cheese and a buttery crust. Crowned with a burst of sweet, tart blueberries.",
+    description: "Velvety cream cheese and a buttery crust. Crowned with a burst of sweet, tart blueberries.",
     price: "$4.00",
     image: coffeeImages.blueberryCake,
     category: "Desserts",
@@ -736,8 +711,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 47,
     name: "New York Cheesecake",
-    description:
-      "The dense, ultra-rich classic set on a graham crust. Velvety smooth.",
+    description: "The dense, ultra-rich classic set on a graham crust. Velvety smooth.",
     price: "$4.00",
     image: coffeeImages.newYorkCheesecake,
     category: "Desserts",
@@ -762,8 +736,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 49,
     name: "Green Tea",
-    description:
-      "Light and calming with antioxidants. It offers a calm, refreshing experience.",
+    description: "Light and calming with antioxidants. It offers a calm, refreshing experience.",
     price: "169",
     image: coffeeImages.greenTea,
     category: "Hot Tea",
@@ -775,8 +748,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 50,
     name: "Hot Chocolate",
-    description:
-      "Light and calming with antioxidants. It offers a calm, refreshing experience.",
+    description: "Light and calming with antioxidants. It offers a calm, refreshing experience.",
     price: "169",
     image: coffeeImages.hotChocolate,
     category: "Hot Chocolate",
@@ -794,8 +766,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 51,
     name: "French Velvet",
-    description:
-      "Light and calming with antioxidants. It offers a calm, refreshing experience.",
+    description: "Light and calming with antioxidants. It offers a calm, refreshing experience.",
     price: "219",
     image: coffeeImages.frenchVelvet,
     category: "Speciality Coffee",
@@ -807,14 +778,78 @@ export const menuItems: MenuItem[] = [
   {
     id: 52,
     name: "Tonic Water",
-    description:
-      "Light and calming with antioxidants. It offers a calm, refreshing experience.",
+    description: "Light and calming with antioxidants. It offers a calm, refreshing experience.",
     price: "239",
     image: coffeeImages.tonicWaterEspresso,
     category: "Speciality Coffee",
     rating: 4.8,
     time: "3 mins",
     tags: ["Traditional", "Warm"],
+    fit: "Contain",
+  },
+  {
+    id: 51,
+    name: "Grenadine Ice Tea",
+    description: "Light and calming with antioxidants. It offers a calm, refreshing experience.",
+    price: "239",
+    image: coffeeImages.grenadineIcedTea,
+    category: "Iced Tea",
+    rating: 4.8,
+    time: "3 mins",
+    tags: ["Traditional", "Warm"],
+    fit: "Contain",
+  },
+  {
+    id: 52,
+    name: "Grenadine Ice Tea",
+    description: "Light and calming with antioxidants. It offers a calm, refreshing experience.",
+    price: "239",
+    image: coffeeImages.grenadineIcedTea,
+    category: "Iced Tea",
+    rating: 4.8,
+    time: "3 mins",
+    tags: ["Traditional", "Warm"],
+    fit: "Contain",
+  },
+
+  // ============= Food Items =================
+  {
+    id: 53,
+    name: "Golden Sticks",
+    subtitle: "French Fries - Salted",
+    description: "Crispy classic fries.",
+    price: "199",
+    image: foodImages.goldenSticks,
+    category: "Food",
+    rating: 4.8,
+    time: "3 mins",
+    tags: ["Veg", "Appetizers"],
+    fit: "Contain",
+  },
+  {
+    id: 54,
+    name: "Mozarella Crunch Sticks",
+    subtitle: "Mozarella Sticks",
+    description: "Melty mozzarella encased in crispy coating.",
+    price: "199",
+    image: foodImages.mozarellaSticks,
+    category: "Food",
+    rating: 4.8,
+    time: "3 mins",
+    tags: ["Veg", "Appetizers"],
+    fit: "Contain",
+  },
+  {
+    id: 54,
+    name: "Monaco Canapés",
+    subtitle: "",
+    description: "Bite-sized crackers topped with fresh veggies and zesty dressing.",
+    price: "199",
+    image: foodImages.monacoCanapes,
+    category: "Food",
+    rating: 4.8,
+    time: "3 mins",
+    tags: ["Veg", "Appetizers"],
     fit: "Contain",
   },
 ];
