@@ -1,5 +1,6 @@
 // src/features/menu/menu-types.ts
 export type Category =
+  | "Breakfast"
   | "Speciality Coffee"
   | "Cold Coffee"
   | "Hot Coffee"
@@ -38,7 +39,7 @@ export type MenuItem = {
 };
 
 export const categories: readonly ("All" | Category)[] = [
-  "All",
+  "Breakfast",
   "Speciality Coffee",
   "Cold Coffee",
   "Hot Coffee",

@@ -7,12 +7,17 @@ import React from "react";
 import { menuItems } from "@/features/menu/menuData";
 import { categories, type Category } from "@/features/menu/menuTypes";
 
+import { foodImages } from "@/features/menu/menuImages";
+import BreakfastCard from "./ui/BreakfastCard";
 import FoodCard from "./ui/FoodCard";
 import MenuCard from "./ui/MenuCard";
+import Pagination from "./ui/pagination";
+import PastaCard from "./ui/PastaCard";
+import PizzaCard from "./ui/PizzaCard";
+import SandwichCroissantSection from "./ui/SandwichCroissantSection";
+import SandwichSection from "./ui/SandwichSection";
 
 type SortKey = "popular" | "price-asc" | "price-desc" | "time";
-
-const PAGE_SIZE = 6;
 
 const priceToNumber = (p: string) => {
   const n = parseFloat(p.replace(/[^0-9.]/g, ""));
@@ -27,25 +32,16 @@ const timeToMinutes = (t: string) => {
 };
 
 const MenuSection: React.FC = () => {
-  const [activeCat, setActiveCat] = React.useState<Category | "All">("All");
+  const [activeCat, setActiveCat] = React.useState<Category | "All">("Breakfast");
   const [query, setQuery] = React.useState("");
   const [sort, setSort] = React.useState<SortKey>("popular");
   const [page, setPage] = React.useState(1);
 
-  // NEW FOR FOOD
-  const [foodSub, setFoodSub] = React.useState("All");
-  const [vegMode, setVegMode] = React.useState<"All" | "Veg" | "Non-Veg">("All");
+  const foodSubs = ["Appetizers", "Sandwiches", "Pastas", "Pizzas", "Burgers", "Wraps", "Sandwich Croissant"];
 
-  const foodSubs = [
-    "All",
-    "Appetizers",
-    "Sandwiches",
-    "Pastas",
-    "Pizzas",
-    "Burgers",
-    "Wraps",
-    "Sandwich Croissant",
-  ];
+  // NEW FOR FOOD
+  const [foodSub, setFoodSub] = React.useState(foodSubs[0]);
+  const [vegMode, setVegMode] = React.useState<"All" | "Veg" | "Non-Veg">("All");
 
   React.useEffect(() => {
     setPage(1);
@@ -69,15 +65,15 @@ const MenuSection: React.FC = () => {
       );
     }
 
-    // ONLY FOOD FILTERING = CATEGORY = Food
     if (activeCat === "Food") {
-      if (foodSub !== "All") {
-        items = items.filter((i) => i.tags.includes(foodSub));
-      }
+      items = items.filter((i) => i.tags.includes(foodSub));
 
       if (vegMode !== "All") {
-        items = items.filter((i) => i.tags.includes(vegMode));
+        items = items.filter((i) => i.tags.includes(vegMode) || i.variants?.some((v) => v.name === vegMode));
       }
+    }
+    if (activeCat === "Breakfast" && vegMode !== "All") {
+      items = items.filter((i) => i.tags.includes(vegMode));
     }
 
     // SORTING
@@ -98,14 +94,30 @@ const MenuSection: React.FC = () => {
 
     return items;
   }, [activeCat, query, sort, foodSub, vegMode]);
+  const pageSize = activeCat === "Food" && foodSub === "Pizzas" ? 8 : 6;
 
-  const pageCount = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const pageCount = Math.max(1, Math.ceil(filtered.length / pageSize));
   const clampedPage = Math.min(page, pageCount);
 
-  const visibleItems = React.useMemo(
-    () => filtered.slice((clampedPage - 1) * PAGE_SIZE, clampedPage * PAGE_SIZE),
-    [filtered, clampedPage]
+  const isBreakfastView = activeCat === "Breakfast";
+  const isSandwichView = activeCat === "Food" && foodSub === "Sandwiches";
+  const isPastaView = activeCat === "Food" && foodSub === "Pastas";
+  const isPizzaView = activeCat === "Food" && foodSub === "Pizzas";
+  const sandwichItems = React.useMemo(
+    () => filtered.filter((i) => i.tags.includes("Sandwiches")),
+    [filtered]
   );
+
+  const isCroissantView = activeCat === "Food" && foodSub === "Sandwich Croissant";
+  const croissantItems = React.useMemo(
+    () => filtered.filter((i) => i.tags.includes("Sandwich Croissant")),
+    [filtered]
+  );
+
+  const visibleItems = React.useMemo(() => {
+    if (isSandwichView) return filtered;
+    return filtered.slice((clampedPage - 1) * pageSize, clampedPage * pageSize);
+  }, [filtered, clampedPage, isSandwichView, pageSize]);
 
   const goToPage = (p: number) => {
     setPage((prev) => {
@@ -247,24 +259,63 @@ const MenuSection: React.FC = () => {
         </div>
 
         {/* Main grid */}
-        <div
-          className={`grid gap-6 ${
-            activeCat === "Food"
-              ? "grid-cols-2 sm:grid-cols-3 lg:grid-cols-6"
-              : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-          }`}
-        >
-          {visibleItems.map((item) =>
-            activeCat === "Food" ? (
-              <FoodCard key={item.id} item={item} />
-            ) : (
-              <MenuCard key={item.id} item={item} />
-            )
-          )}
-        </div>
+        {!isSandwichView && !isCroissantView && pageCount > 1 && (
+          <Pagination
+            page={clampedPage}
+            pageCount={pageCount}
+            onPrev={goPrev}
+            onNext={goNext}
+            onPage={goToPage}
+          />
+        )}
+        {isPastaView ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+            {visibleItems.map((item) => (
+              <PastaCard key={item.id} item={item} />
+            ))}
+          </div>
+        ) : isSandwichView ? (
+          <SandwichSection
+            items={sandwichItems}
+            vegMode={vegMode}
+            vegHero={foodImages.vegCheeseSandwich}
+            nonVegHero={foodImages.vegCheeseSandwich}
+          />
+        ) : isCroissantView ? (
+          <SandwichCroissantSection
+            items={croissantItems}
+            vegMode={vegMode}
+            vegHero={foodImages.vegCroissant}
+            nonVegHero={foodImages.nonVegCroissant}
+          />
+        ) : (
+          <div
+            className={`grid gap-6 ${
+              activeCat === "Food"
+                ? isPizzaView || isBreakfastView
+                  ? "grid-cols-2 sm:grid-cols-3 lg:grid-cols-4"
+                  : "grid-cols-2 sm:grid-cols-3 lg:grid-cols-6"
+                : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+            }`}
+          >
+            {visibleItems.map((item) =>
+              activeCat === "Food" ? (
+                isPizzaView ? (
+                  <PizzaCard key={item.id} item={item} />
+                ) : isBreakfastView ? (
+                  <BreakfastCard key={item.id} item={item} />
+                ) : (
+                  <FoodCard key={item.id} item={item} />
+                )
+              ) : (
+                <MenuCard key={item.id} item={item} />
+              )
+            )}
+          </div>
+        )}
 
         {/* PAGINATION */}
-        {pageCount > 1 && (
+        {/* {pageCount > 1 && (
           <div className="mt-10 flex items-center justify-center gap-3">
             <button onClick={goPrev}>Prev</button>
             {Array.from({ length: pageCount }, (_, i) => i + 1).map((p) => (
@@ -274,7 +325,7 @@ const MenuSection: React.FC = () => {
             ))}
             <button onClick={goNext}>Next</button>
           </div>
-        )}
+        )} */}
       </div>
     </section>
   );
