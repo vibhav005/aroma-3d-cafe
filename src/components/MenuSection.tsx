@@ -8,7 +8,9 @@ import { menuItems } from "@/features/menu/menuData";
 import { categories, type Category } from "@/features/menu/menuTypes";
 
 import { foodImages } from "@/features/menu/menuImages";
+import AppetizerCard from "./ui/AppetizersCard";
 import BreakfastCard from "./ui/BreakfastCard";
+import BurgerCard from "./ui/BurgerCard";
 import FoodCard from "./ui/FoodCard";
 import MenuCard from "./ui/MenuCard";
 import Pagination from "./ui/pagination";
@@ -98,6 +100,9 @@ const MenuSection: React.FC = () => {
 
   const pageCount = Math.max(1, Math.ceil(filtered.length / pageSize));
   const clampedPage = Math.min(page, pageCount);
+
+  const isBurgerView = activeCat === "Food" && foodSub === "Burgers";
+  const isAppetizerView = activeCat === "Food" && foodSub === "Appetizers";
 
   const isBreakfastView = activeCat === "Breakfast";
   const isSandwichView = activeCat === "Food" && foodSub === "Sandwiches";
@@ -292,7 +297,13 @@ const MenuSection: React.FC = () => {
           <div
             className={`grid gap-6 ${
               activeCat === "Food"
-                ? isPizzaView || isBreakfastView
+                ? isPizzaView
+                  ? "grid-cols-2 sm:grid-cols-3 lg:grid-cols-4"
+                  : isBurgerView
+                  ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+                  : isAppetizerView
+                  ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
+                  : isBreakfastView
                   ? "grid-cols-2 sm:grid-cols-3 lg:grid-cols-4"
                   : "grid-cols-2 sm:grid-cols-3 lg:grid-cols-6"
                 : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
@@ -302,6 +313,10 @@ const MenuSection: React.FC = () => {
               activeCat === "Food" ? (
                 isPizzaView ? (
                   <PizzaCard key={item.id} item={item} />
+                ) : isBurgerView ? (
+                  <BurgerCard key={item.id} item={item} />
+                ) : isAppetizerView ? (
+                  <AppetizerCard key={item.id} item={item} />
                 ) : isBreakfastView ? (
                   <BreakfastCard key={item.id} item={item} />
                 ) : (

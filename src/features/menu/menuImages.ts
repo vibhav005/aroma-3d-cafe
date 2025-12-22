@@ -65,17 +65,24 @@ import sizzling from "@/assets/desserts/sizzling.jpg";
 // Food Images - Appetizers
 import avocadoToast from "@/assets/food/appetizers/avocado_toast.jpg";
 import cheesyGarlicBliss from "@/assets/food/appetizers/cheesy_garlic_bliss.jpg";
+import chickenCheesyFries from "@/assets/food/appetizers/chicken_cheesy_fries.jpg";
 import chickenPopcorn from "@/assets/food/appetizers/chicken_popcorn.jpg";
 import chickenSeekhKebab from "@/assets/food/appetizers/chicken_seekh_kebab.jpg";
 import chickenTandooriSeekhKebab from "@/assets/food/appetizers/chicken_tandoori_seekh_kebab.jpg";
 import chickenWings from "@/assets/food/appetizers/chicken_wings.jpg";
 import crispyBites from "@/assets/food/appetizers/crispy_bites.jpg";
+import fiestaCrunch from "@/assets/food/appetizers/fiesta_crunch_nachos.jpg";
+import goldenRings from "@/assets/food/appetizers/golden_rings.jpg";
 import goldenSticks from "@/assets/food/appetizers/golden_sticks.jpg";
+import goldenWedges from "@/assets/food/appetizers/golden_wedges.jpg";
+import goldenCrisps from "@/assets/food/appetizers/hash_brown.jpg";
+import meltedBliss from "@/assets/food/appetizers/melted_bliss.jpg";
 import monacoCanapes from "@/assets/food/appetizers/monaco_canape.jpg";
 import mozarellaSticks from "@/assets/food/appetizers/mozzarella_sticks.jpg";
 import pancake from "@/assets/food/appetizers/pancake.jpg";
 import spicyCrunch from "@/assets/food/appetizers/spicy_crunch.jpg";
 import toastedDelight from "@/assets/food/appetizers/toasted_delight.jpg";
+import zestyPotatoPops from "@/assets/food/appetizers/zesty_potato_pops.jpg";
 
 // Food Images - Sandwiches
 import eggCheeseSandwich from "@/assets/food/sandwiches/egg_cheese_sandwich.jpg";
@@ -124,6 +131,13 @@ import hispanicCharm from "@/assets/food/breakfast/hispanic_charm.jpg";
 import masalaMaggie from "@/assets/food/breakfast/masala_maggie.jpg";
 import savoryFungi from "@/assets/food/breakfast/savory_fungi.jpg";
 import spicedDelight from "@/assets/food/breakfast/spiced_delight.jpg";
+
+import chickenCheeseBurger from "@/assets/food/burgers/chicken_cheese.jpg";
+import maharajaNonVeg from "@/assets/food/burgers/maharaja_nonveg.jpg";
+import maharajaVeg from "@/assets/food/burgers/maharaja_veg.jpg";
+import paneerBurger from "@/assets/food/burgers/paneer_burger.jpg";
+import tandooriChickenBurger from "@/assets/food/burgers/tandoori_chicken.jpg";
+import vegBurger from "@/assets/food/burgers/veg_burger.jpg";
 export const coffeeImages = {
   //Coffee
   chillVietnamese,
@@ -205,6 +219,13 @@ export const foodImages = {
   chickenPopcorn,
   chickenTandooriSeekhKebab,
   chickenSeekhKebab,
+  zestyPotatoPops,
+  goldenCrisps,
+  fiestaCrunch,
+  goldenRings,
+  goldenWedges,
+  chickenCheesyFries,
+  meltedBliss,
 
   //Food - Sandwiches - Images
   vegCheeseSandwich,
@@ -253,4 +274,12 @@ export const foodImages = {
   goldenSunrise,
   caesarSaladVeg,
   caesarSaladNv,
+
+  //Food - Burgers - Images
+  vegBurger,
+  paneerBurger,
+  maharajaVeg,
+  chickenCheeseBurger,
+  tandooriChickenBurger,
+  maharajaNonVeg,
 };
