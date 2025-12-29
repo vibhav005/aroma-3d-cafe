@@ -18,6 +18,7 @@ import PastaCard from "./ui/PastaCard";
 import PizzaCard from "./ui/PizzaCard";
 import SandwichCroissantSection from "./ui/SandwichCroissantSection";
 import SandwichSection from "./ui/SandwichSection";
+import WrapCard from "./ui/WrapCard";
 
 type SortKey = "popular" | "price-asc" | "price-desc" | "time";
 
@@ -74,9 +75,9 @@ const MenuSection: React.FC = () => {
         items = items.filter((i) => i.tags.includes(vegMode) || i.variants?.some((v) => v.name === vegMode));
       }
     }
-    if (activeCat === "Breakfast" && vegMode !== "All") {
-      items = items.filter((i) => i.tags.includes(vegMode));
-    }
+    // if (activeCat === "Breakfast" && vegMode !== "All") {
+    //   items = items.filter((i) => i.tags.includes(vegMode));
+    // }
 
     // SORTING
     switch (sort) {
@@ -96,13 +97,14 @@ const MenuSection: React.FC = () => {
 
     return items;
   }, [activeCat, query, sort, foodSub, vegMode]);
-  const pageSize = activeCat === "Food" && foodSub === "Pizzas" ? 8 : 6;
+  const pageSize = activeCat === "Food" && (foodSub === "Pizzas" || foodSub === "Wraps") ? 8 : 6;
 
   const pageCount = Math.max(1, Math.ceil(filtered.length / pageSize));
   const clampedPage = Math.min(page, pageCount);
 
   const isBurgerView = activeCat === "Food" && foodSub === "Burgers";
   const isAppetizerView = activeCat === "Food" && foodSub === "Appetizers";
+  const isWrapView = activeCat === "Food" && foodSub === "Wraps";
 
   const isBreakfastView = activeCat === "Breakfast";
   const isSandwichView = activeCat === "Food" && foodSub === "Sandwiches";
@@ -301,6 +303,8 @@ const MenuSection: React.FC = () => {
                   ? "grid-cols-2 sm:grid-cols-3 lg:grid-cols-4"
                   : isBurgerView
                   ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+                  : isWrapView
+                  ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
                   : isAppetizerView
                   ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
                   : isBreakfastView
@@ -313,6 +317,8 @@ const MenuSection: React.FC = () => {
               activeCat === "Food" ? (
                 isPizzaView ? (
                   <PizzaCard key={item.id} item={item} />
+                ) : isWrapView ? (
+                  <WrapCard key={item.id} item={item} />
                 ) : isBurgerView ? (
                   <BurgerCard key={item.id} item={item} />
                 ) : isAppetizerView ? (

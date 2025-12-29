@@ -1,3 +1,4 @@
+// src/features/menu/ui/WrapCard.tsx
 import type { MenuItem } from "@/features/menu/menuTypes";
 import { addToCart } from "@/lib/cartBus";
 import { motion } from "framer-motion";
@@ -41,14 +42,19 @@ const PricePill: React.FC<{ price: string; onClick: () => void }> = ({ price, on
   );
 };
 
-const PastaCard: React.FC<{ item: MenuItem }> = ({ item }) => {
+/**
+ * WrapCard supports two patterns:
+ * 1) variants: [{name:"Veg"},{name:"Non-Veg"}]  -> shows two price pills like PastaCard
+ * 2) no variants -> shows single price pill
+ */
+const WrapCard: React.FC<{ item: MenuItem }> = ({ item }) => {
   const veg = item.variants?.find((v) => v.name === "Veg");
   const nonVeg = item.variants?.find((v) => v.name === "Non-Veg");
 
-  const add = (label: "Veg" | "Non-Veg", price: string) => {
+  const add = (label: "Veg" | "Non-Veg" | "Regular", price: string) => {
     addToCart({
       id: item.id,
-      name: `${item.name} (${label})`,
+      name: label === "Regular" ? item.name : `${item.name} (${label})`,
       price: priceToNumber(price),
       image: item.image,
     });
@@ -56,6 +62,8 @@ const PastaCard: React.FC<{ item: MenuItem }> = ({ item }) => {
 
   const first = item.name.split(" ").slice(0, 1).join(" ");
   const rest = item.name.split(" ").slice(1).join(" ");
+
+  const hasDual = Boolean(veg && nonVeg);
 
   return (
     <div className="w-full max-w-[360px]">
@@ -66,11 +74,12 @@ const PastaCard: React.FC<{ item: MenuItem }> = ({ item }) => {
         transition={{ duration: 0.35, ease: "easeOut" }}
         whileHover={{ y: -6 }}
         className="
-          group relative rounded-[28px] overflow-hidden
-          border border-white/10 shadow-sm hover:shadow-2xl
-          bg-background/45 backdrop-blur-xl
-          p-5
-        "
+      w-full max-w-[340px]
+      group relative rounded-[28px] overflow-hidden
+      border border-white/10 shadow-sm hover:shadow-2xl
+      bg-background/45 backdrop-blur-xl
+      p-5
+    "
       >
         {/* glass glow */}
         <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -81,7 +90,7 @@ const PastaCard: React.FC<{ item: MenuItem }> = ({ item }) => {
         {/* inner ring */}
         <div className="pointer-events-none absolute inset-0 rounded-[28px] ring-1 ring-white/10" />
 
-        {/* Image frame (same theme as Pizza) */}
+        {/* Image frame */}
         <div
           className="
             relative rounded-3xl overflow-hidden
@@ -90,7 +99,7 @@ const PastaCard: React.FC<{ item: MenuItem }> = ({ item }) => {
             shadow-[inset_0_1px_0_rgba(255,255,255,0.25)]
           "
         >
-          {/* soft vignette */}
+          {/* vignette */}
           <div className="absolute inset-0 pointer-events-none">
             <div className="absolute -top-10 -left-10 h-40 w-40 rounded-full bg-white/25 blur-2xl" />
             <div className="absolute -bottom-12 -right-12 h-48 w-48 rounded-full bg-coffee-light/20 blur-2xl" />
@@ -125,25 +134,33 @@ const PastaCard: React.FC<{ item: MenuItem }> = ({ item }) => {
 
           <p className="mt-1 text-sm text-muted-foreground italic">{item.description}</p>
 
-          <div className="mt-5 flex items-center justify-center gap-10">
-            <DietMark type="Veg" />
-            <DietMark type="Non-Veg" />
-          </div>
+          {/* Diet row */}
+          {hasDual ? (
+            <div className="mt-5 flex items-center justify-center gap-10">
+              <DietMark type="Veg" />
+              <DietMark type="Non-Veg" />
+            </div>
+          ) : (
+            <div className="mt-5 flex items-center justify-center">
+              <DietMark type={item.tags.includes("Veg") ? "Veg" : "Non-Veg"} />
+            </div>
+          )}
 
-          <div className="mt-4 flex items-center justify-center gap-10">
-            <PricePill
-              price={veg?.price || item.price}
-              onClick={() => add("Veg", veg?.price || item.price)}
-            />
-            <PricePill
-              price={nonVeg?.price || item.price}
-              onClick={() => add("Non-Veg", nonVeg?.price || item.price)}
-            />
-          </div>
+          {/* Price row */}
+          {hasDual ? (
+            <div className="mt-4 flex items-center justify-center gap-10">
+              <PricePill price={veg!.price} onClick={() => add("Veg", veg!.price)} />
+              <PricePill price={nonVeg!.price} onClick={() => add("Non-Veg", nonVeg!.price)} />
+            </div>
+          ) : (
+            <div className="mt-4 flex items-center justify-center">
+              <PricePill price={item.price} onClick={() => add("Regular", item.price)} />
+            </div>
+          )}
         </div>
       </motion.div>
     </div>
   );
 };
 
-export default PastaCard;
+export default WrapCard;

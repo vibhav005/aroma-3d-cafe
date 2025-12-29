@@ -1669,7 +1669,7 @@ export const menuItems: MenuItem[] = [
     category: "Breakfast",
     rating: 4.8,
     time: "8 mins",
-    tags: ["Veg"],
+    tags: [""],
     fit: "Contain",
   },
   {
@@ -1683,7 +1683,7 @@ export const menuItems: MenuItem[] = [
     category: "Breakfast",
     rating: 4.8,
     time: "10 mins",
-    tags: ["Non-Veg"],
+    tags: [""],
     fit: "Contain",
   },
   {
@@ -1697,7 +1697,7 @@ export const menuItems: MenuItem[] = [
     category: "Breakfast",
     rating: 4.8,
     time: "10 mins",
-    tags: ["Non-Veg"],
+    tags: [""],
     fit: "Contain",
   },
   {
@@ -1711,7 +1711,7 @@ export const menuItems: MenuItem[] = [
     category: "Breakfast",
     rating: 4.8,
     time: "10 mins",
-    tags: ["Non-Veg"],
+    tags: [""],
     fit: "Contain",
   },
   {
@@ -1725,7 +1725,7 @@ export const menuItems: MenuItem[] = [
     category: "Breakfast",
     rating: 4.8,
     time: "10 mins",
-    tags: ["Non-Veg"],
+    tags: [""],
     fit: "Contain",
   },
   {
@@ -1739,7 +1739,7 @@ export const menuItems: MenuItem[] = [
     category: "Breakfast",
     rating: 4.8,
     time: "9 mins",
-    tags: ["Non-Veg"],
+    tags: [""],
     fit: "Contain",
   },
   {
@@ -1752,7 +1752,7 @@ export const menuItems: MenuItem[] = [
     category: "Breakfast",
     rating: 4.8,
     time: "6 mins",
-    tags: ["Veg"],
+    tags: [""],
     fit: "Contain",
   },
   {
@@ -1765,7 +1765,7 @@ export const menuItems: MenuItem[] = [
     category: "Breakfast",
     rating: 4.8,
     time: "7 mins",
-    tags: ["Non-Veg"],
+    tags: [""],
     fit: "Contain",
   },
   // ============= Burgers (id: 124 - 129) =================
