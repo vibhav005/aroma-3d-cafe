@@ -1,30 +1,16 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
-import {
-  Calendar,
-  Clock,
-  Users,
-  Phone,
-  Mail,
-  MessageCircle,
-  MapPin,
-  ExternalLink,
-  Minus,
-  Plus,
-} from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { businessInfo } from "@/data/mockData";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import { Reservation } from "@/types";
-import { businessInfo } from "@/data/mockData";
-import CafeMapGL from "./CafeMapGl";
-import CafeMap3D from "./CafeMapGl";
-import CafeMapPro from "./CafeMapGl";
-
+import { motion } from "framer-motion";
+import { Calendar, Clock, Mail, MapPin, MessageCircle, Minus, Phone, Plus, Users } from "lucide-react";
+import { useState } from "react";
+import CafeMapPro from "./CafeMapGL";
 const GAS_URL = import.meta.env.VITE_GAS_RESERVATIONS_URL as string | undefined;
 
 /* -------------------------------- Data -------------------------------- */
@@ -94,8 +80,7 @@ const Reservations = () => {
     const newErrors: Partial<Reservation> = {};
     if (!formData.name.trim()) newErrors.name = "Name is required";
     if (!formData.email.trim()) newErrors.email = "Email is required";
-    else if (!/\S+@\S+\.\S+/.test(formData.email))
-      newErrors.email = "Invalid email format";
+    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = "Invalid email format";
     if (!formData.phone.trim()) newErrors.phone = "Phone number is required";
     if (!formData.date) newErrors.date = "Date is required";
     if (!formData.time) newErrors.time = "Time is required";
@@ -124,8 +109,7 @@ const Reservations = () => {
     if (!GAS_URL) {
       toast({
         title: "Missing configuration",
-        description:
-          "Set VITE_GAS_RESERVATIONS_URL in your .env to the Apps Script Web App URL.",
+        description: "Set VITE_GAS_RESERVATIONS_URL in your .env to the Apps Script Web App URL.",
         variant: "destructive",
       });
       return;
@@ -181,8 +165,7 @@ const Reservations = () => {
       const message =
         err?.name === "AbortError"
           ? "Request timed out. Please try again."
-          : err?.message ||
-            "Something went wrong. Please try again or call us directly.";
+          : err?.message || "Something went wrong. Please try again or call us directly.";
 
       toast({
         title: "Reservation failed",
@@ -196,14 +179,10 @@ const Reservations = () => {
   };
 
   const todayISO = new Date().toISOString().split("T")[0];
-  const tomorrowISO = new Date(Date.now() + 24 * 60 * 60 * 1000)
-    .toISOString()
-    .split("T")[0];
+  const tomorrowISO = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString().split("T")[0];
 
-  const decGuests = () =>
-    updateField("guests", Math.max(guestMin, formData.guests - 1));
-  const incGuests = () =>
-    updateField("guests", Math.min(guestMax, formData.guests + 1));
+  const decGuests = () => updateField("guests", Math.max(guestMin, formData.guests - 1));
+  const incGuests = () => updateField("guests", Math.min(guestMax, formData.guests + 1));
 
   return (
     <section id="reservations" className="relative bg-cream">
@@ -224,9 +203,7 @@ const Reservations = () => {
             <Calendar className="w-4 h-4" />
             <span className="text-xs font-medium">Book in advance</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-coffee-rich">
-            Reserve Your Table
-          </h2>
+          <h2 className="text-4xl md:text-5xl font-display font-bold text-coffee-rich">Reserve Your Table</h2>
           <p className="text-lg md:text-xl text-coffee-medium/90 max-w-2xl mx-auto mt-3">
             Secure your spot for an exceptional coffee experience
           </p>
@@ -242,9 +219,7 @@ const Reservations = () => {
           >
             <Card className="border border-coffee-rich/15 bg-white/70 backdrop-blur-xl shadow-[0_20px_40px_rgba(136,107,71,0.12)]">
               <CardHeader className="pb-4">
-                <CardTitle className="text-coffee-rich">
-                  Make a Reservation
-                </CardTitle>
+                <CardTitle className="text-coffee-rich">Make a Reservation</CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -266,9 +241,7 @@ const Reservations = () => {
                         )}
                         placeholder="Your full name"
                       />
-                      {errors.name && (
-                        <p className="text-red-500 text-sm">{errors.name}</p>
-                      )}
+                      {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
                     </div>
 
                     <div className="space-y-2">
@@ -287,9 +260,7 @@ const Reservations = () => {
                         )}
                         placeholder="(555) 123-4567"
                       />
-                      {errors.phone && (
-                        <p className="text-red-500 text-sm">{errors.phone}</p>
-                      )}
+                      {errors.phone && <p className="text-red-500 text-sm">{errors.phone}</p>}
                     </div>
                   </div>
 
@@ -309,19 +280,14 @@ const Reservations = () => {
                       )}
                       placeholder="your.email@example.com"
                     />
-                    {errors.email && (
-                      <p className="text-red-500 text-sm">{errors.email}</p>
-                    )}
+                    {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
                   </div>
 
                   {/* Reservation Details */}
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     {/* Date + quick-pick */}
                     <div className="space-y-2">
-                      <Label
-                        htmlFor="date"
-                        className="text-coffee-rich flex items-center gap-2"
-                      >
+                      <Label htmlFor="date" className="text-coffee-rich flex items-center gap-2">
                         <Calendar className="w-4 h-4" /> Date *
                       </Label>
                       <Input
@@ -352,9 +318,7 @@ const Reservations = () => {
                           Tomorrow
                         </button>
                       </div>
-                      {errors.date && (
-                        <p className="text-red-500 text-sm">{errors.date}</p>
-                      )}
+                      {errors.date && <p className="text-red-500 text-sm">{errors.date}</p>}
                     </div>
 
                     {/* Guests stepper */}
@@ -372,8 +336,7 @@ const Reservations = () => {
                           <Minus className="w-4 h-4" />
                         </button>
                         <div className="text-coffee-rich font-semibold select-none">
-                          {formData.guests}{" "}
-                          {formData.guests === 1 ? "Guest" : "Guests"}
+                          {formData.guests} {formData.guests === 1 ? "Guest" : "Guests"}
                         </div>
                         <button
                           type="button"
@@ -392,8 +355,7 @@ const Reservations = () => {
                         <Clock className="w-4 h-4" /> Pro tip
                       </Label>
                       <div className="text-sm text-coffee-medium/90 bg-coffee-medium/10 rounded-lg p-3">
-                        Lunchtime & evenings are popular. Try earlier slots for
-                        a calmer vibe.
+                        Lunchtime & evenings are popular. Try earlier slots for a calmer vibe.
                       </div>
                     </div>
                   </div>
@@ -434,26 +396,19 @@ const Reservations = () => {
                         );
                       })}
                     </div>
-                    {errors.time && (
-                      <p className="text-red-500 text-sm">{errors.time}</p>
-                    )}
+                    {errors.time && <p className="text-red-500 text-sm">{errors.time}</p>}
                   </div>
 
                   {/* Special requests */}
                   <div className="space-y-2">
-                    <Label
-                      htmlFor="requests"
-                      className="text-coffee-rich flex items-center gap-2"
-                    >
+                    <Label htmlFor="requests" className="text-coffee-rich flex items-center gap-2">
                       <MessageCircle className="w-4 h-4" />
                       Special Requests (Optional)
                     </Label>
                     <Textarea
                       id="requests"
                       value={formData.specialRequests}
-                      onChange={(e) =>
-                        updateField("specialRequests", e.target.value)
-                      }
+                      onChange={(e) => updateField("specialRequests", e.target.value)}
                       className="bg-white/80 border-coffee-rich/20 focus-visible:ring-cream focus-visible:border-cream resize-none"
                       placeholder="Any dietary restrictions, accessibility needs, or special occasions..."
                       rows={3}
@@ -501,9 +456,7 @@ const Reservations = () => {
           >
             <Card className="border border-coffee-rich/15 bg-white/70 backdrop-blur-xl shadow-[0_20px_40px_rgba(136,107,71,0.12)]">
               <CardHeader className="pb-4">
-                <CardTitle className="text-coffee-rich">
-                  Contact & Hours
-                </CardTitle>
+                <CardTitle className="text-coffee-rich">Contact & Hours</CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="space-y-4">
@@ -514,8 +467,7 @@ const Reservations = () => {
                       <p className="text-coffee-medium text-sm">
                         {businessInfo.address.street}
                         <br />
-                        {businessInfo.address.city},{" "}
-                        {businessInfo.address.state} {businessInfo.address.zip}
+                        {businessInfo.address.city}, {businessInfo.address.state} {businessInfo.address.zip}
                       </p>
                     </div>
                   </div>
@@ -550,15 +502,11 @@ const Reservations = () => {
                   <div className="space-y-2 text-sm">
                     {Object.entries(businessInfo.hours).map(([day, hours]) => (
                       <div key={day} className="flex justify-between">
-                        <span className="text-coffee-medium capitalize">
-                          {day}
-                        </span>
+                        <span className="text-coffee-medium capitalize">{day}</span>
                         <span className="text-coffee-rich">
                           {(hours as any).closed
                             ? "Closed"
-                            : `${(hours as any).open} - ${
-                                (hours as any).close
-                              }`}
+                            : `${(hours as any).open} - ${(hours as any).close}`}
                         </span>
                       </div>
                     ))}
@@ -568,18 +516,18 @@ const Reservations = () => {
             </Card>
 
             <Card className="border border-coffee-rich/15 bg-white/70 backdrop-blur-xl shadow-[0_20px_40px_rgba(136,107,71,0.12)]">
-  <CardContent className="p-0">
-    <CafeMapPro
-      coords={{ lat: businessInfo.coordinates.lat, lng: businessInfo.coordinates.lng }}
-      cafeName="Deccan Brews"
-      addressLine={`${businessInfo.address.street}, ${businessInfo.address.city}, ${businessInfo.address.state} ${businessInfo.address.zip}`}
-      phone="+91 7387833732"
-      mapsUrl="https://share.google/fx4jsIy3qc0Advkl3"
-      deliveryRadiusMeters={4000}
-      className="h-64 md:h-72 rounded-xl overflow-hidden"
-    />
-  </CardContent>
-</Card>
+              <CardContent className="p-0">
+                <CafeMapPro
+                  coords={{ lat: businessInfo.coordinates.lat, lng: businessInfo.coordinates.lng }}
+                  cafeName="Deccan Brews"
+                  addressLine={`${businessInfo.address.street}, ${businessInfo.address.city}, ${businessInfo.address.state} ${businessInfo.address.zip}`}
+                  phone="+91 7387833732"
+                  mapsUrl="https://share.google/fx4jsIy3qc0Advkl3"
+                  deliveryRadiusMeters={4000}
+                  className="h-64 md:h-72 rounded-xl overflow-hidden"
+                />
+              </CardContent>
+            </Card>
           </motion.div>
         </div>
       </div>

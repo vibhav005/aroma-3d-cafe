@@ -1,16 +1,9 @@
-import React from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import {
-  Instagram,
-  Heart,
-  Share,
-  X,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GalleryItem } from "@/types";
 import galleryItems from "@/utils/galleryItems";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { ChevronLeft, ChevronRight, Heart, Instagram, Share, X } from "lucide-react";
+import React from "react";
 
 /* ----------------------------- Data / Types ----------------------------- */
 
@@ -74,13 +67,7 @@ import galleryItems from "@/utils/galleryItems";
 //   },
 // ];
 
-const categories = [
-  "All",
-  "Coffee",
-  "Interior",
-  "Latte Art",
-  "Pastries",
-] as const;
+const categories = ["All", "Interior"] as const;
 type Category = (typeof categories)[number];
 
 /* ----------------------------- Hooks / Utils ---------------------------- */
@@ -133,8 +120,7 @@ function useDominantColor(src: string) {
   return color;
 }
 
-const clamp = (n: number, min: number, max: number) =>
-  Math.min(max, Math.max(min, n));
+const clamp = (n: number, min: number, max: number) => Math.min(max, Math.max(min, n));
 
 /* ---------------------------- Card Component ---------------------------- */
 
@@ -162,12 +148,8 @@ const GalleryCard: React.FC<{
     setPeeking(false);
   };
 
-  const tintedOverlay = `linear-gradient(to top, rgba(0,0,0,${
-    0.4 + mood / 600
-  }), transparent 60%)`;
-  const moodWarmth = `hue-rotate(${mood * 0.12}deg) saturate(${
-    1 + mood / 300
-  })`;
+  const tintedOverlay = `linear-gradient(to top, rgba(0,0,0,${0.4 + mood / 600}), transparent 60%)`;
+  const moodWarmth = `hue-rotate(${mood * 0.12}deg) saturate(${1 + mood / 300})`;
 
   return (
     <motion.div
@@ -226,19 +208,14 @@ const GalleryCard: React.FC<{
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               className={`w-8 h-8 bg-background/80 backdrop-blur-sm rounded-full flex items-center justify-center transition-colors border border-white/10
-                ${
-                  liked
-                    ? "text-red-500"
-                    : "text-coffee-medium hover:bg-background"
-                }`}
+                ${liked ? "text-red-500" : "text-coffee-medium hover:bg-background"}`}
               aria-label="Like"
             >
               <Heart className={`h-4 w-4 ${liked ? "fill-red-500" : ""}`} />
             </motion.button>
             <motion.button
               onClick={async () => {
-                const url =
-                  window.location.href.split("#")[0] + `#gallery-${item.id}`;
+                const url = window.location.href.split("#")[0] + `#gallery-${item.id}`;
                 if ((navigator as any).share) {
                   try {
                     await (navigator as any).share({
@@ -263,17 +240,11 @@ const GalleryCard: React.FC<{
 
         {/* Bottom content */}
         <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-0">
-          <h3 className="text-xl font-semibold text-cream mb-1">
-            {item.title}
-          </h3>
+          <h3 className="text-xl font-semibold text-cream mb-1">{item.title}</h3>
           <p className="text-cream/85 text-sm mb-3">{item.description}</p>
           <div className="flex items-center justify-between text-cream/80">
             <div className="flex items-center gap-2">
-              <Heart
-                className={`h-4 w-4 ${
-                  liked ? "fill-red-500 text-red-500" : ""
-                }`}
-              />
+              <Heart className={`h-4 w-4 ${liked ? "fill-red-500 text-red-500" : ""}`} />
               <span className="text-sm">{item.likes + (liked ? 1 : 0)}</span>
             </div>
             <motion.button
@@ -350,9 +321,7 @@ const Lightbox: React.FC<{
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 md:p-6">
               <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3">
                 <div>
-                  <h3 className="text-cream text-xl font-semibold">
-                    {item.title}
-                  </h3>
+                  <h3 className="text-cream text-xl font-semibold">{item.title}</h3>
                   <p className="text-cream/80 text-sm">{item.description}</p>
                 </div>
                 <div className="flex gap-2">
@@ -363,10 +332,7 @@ const Lightbox: React.FC<{
                   >
                     <ChevronLeft className="h-4 w-4 mr-1" /> Prev
                   </Button>
-                  <Button
-                    className="bg-cream text-coffee-rich hover:bg-warm-white"
-                    onClick={onNext}
-                  >
+                  <Button className="bg-cream text-coffee-rich hover:bg-warm-white" onClick={onNext}>
                     Next <ChevronRight className="h-4 w-4 ml-1" />
                   </Button>
                 </div>
@@ -405,18 +371,11 @@ const GallerySection: React.FC = () => {
   };
 
   const close = () => setLightboxIndex(null);
-  const prev = () =>
-    setLightboxIndex((i) =>
-      i == null ? i : (i - 1 + filtered.length) % filtered.length
-    );
-  const next = () =>
-    setLightboxIndex((i) => (i == null ? i : (i + 1) % filtered.length));
+  const prev = () => setLightboxIndex((i) => (i == null ? i : (i - 1 + filtered.length) % filtered.length));
+  const next = () => setLightboxIndex((i) => (i == null ? i : (i + 1) % filtered.length));
 
   return (
-    <section
-      id="gallery"
-      className="py-20 bg-background relative overflow-hidden"
-    >
+    <section id="gallery" className="py-20 bg-background relative overflow-hidden">
       {/* Ambient blobs */}
       <div className="absolute top-20 left-10 w-32 h-32 bg-coffee-medium/5 rounded-full blur-2xl" />
       <div className="absolute bottom-20 right-10 w-48 h-48 bg-sage/5 rounded-full blur-3xl" />
@@ -430,12 +389,9 @@ const GallerySection: React.FC = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-10 md:mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-coffee-rich mb-4">
-            Our Gallery
-          </h2>
+          <h2 className="text-4xl md:text-5xl font-display font-bold text-coffee-rich mb-4">Our Gallery</h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Moments captured, memories made. Follow our journey through coffee,
-            community, and creativity.
+            Moments captured, memories made. Follow our journey through coffee, community, and creativity.
           </p>
 
           {/* Social */}
@@ -510,18 +466,12 @@ const GallerySection: React.FC = () => {
                   min={0}
                   max={100}
                   value={mood}
-                  onChange={(e) =>
-                    setMood(clamp(parseInt(e.target.value, 10), 0, 100))
-                  }
+                  onChange={(e) => setMood(clamp(parseInt(e.target.value, 10), 0, 100))}
                   className="accent-coffee-medium w-44"
                   aria-label="Gallery mood warmth"
                 />
                 <div className="text-xs text-foreground/60 w-24">
-                  {mood < 33
-                    ? "Morning"
-                    : mood < 66
-                    ? "Afternoon"
-                    : "Golden Hour"}
+                  {mood < 33 ? "Morning" : mood < 66 ? "Afternoon" : "Golden Hour"}
                 </div>
               </div>
             </div>
@@ -531,12 +481,7 @@ const GallerySection: React.FC = () => {
         {/* Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {filtered.map((item, i) => (
-            <GalleryCard
-              key={item.id}
-              item={item}
-              onOpen={() => openAt(item.id)}
-              mood={mood}
-            />
+            <GalleryCard key={item.id} item={item} onOpen={() => openAt(item.id)} mood={mood} />
           ))}
         </div>
 
@@ -566,13 +511,10 @@ const GallerySection: React.FC = () => {
           className="mt-20 text-center bg-gradient-to-r from-coffee-medium/5 to-sage/5 p-12 rounded-3xl"
         >
           <Instagram className="h-16 w-16 text-coffee-medium mx-auto mb-6" />
-          <h3 className="text-2xl font-display font-bold text-coffee-rich mb-4">
-            Share Your Brews Moments
-          </h3>
+          <h3 className="text-2xl font-display font-bold text-coffee-rich mb-4">Share Your Brews Moments</h3>
           <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-            Tag us @Deccan Brews Cafe and use #Deccanbrewscafe to be featured in
-            our gallery. We love seeing how our coffee becomes part of your
-            daily story.
+            Tag us @Deccan Brews Cafe and use #Deccanbrewscafe to be featured in our gallery. We love seeing
+            how our coffee becomes part of your daily story.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
@@ -596,13 +538,7 @@ const GallerySection: React.FC = () => {
       {/* Lightbox */}
       <AnimatePresence>
         {lightboxIndex != null && (
-          <Lightbox
-            items={filtered}
-            index={lightboxIndex}
-            onClose={close}
-            onPrev={prev}
-            onNext={next}
-          />
+          <Lightbox items={filtered} index={lightboxIndex} onClose={close} onPrev={prev} onNext={next} />
         )}
       </AnimatePresence>
     </section>

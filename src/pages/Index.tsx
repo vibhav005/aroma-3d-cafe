@@ -1,9 +1,8 @@
-import Navigation from "@/components/Navigation";
-import HeroSection from "@/components/HeroSection";
-import MenuSection from "@/components/MenuSection";
 import AboutSection from "@/components/AboutSection";
 import GallerySection from "@/components/GallerySection";
-import FloatingCTA from "@/components/FloatingCTA";
+import HeroSection from "@/components/HeroSection";
+import MenuSection from "@/components/MenuSection";
+import Navigation from "@/components/Navigation";
 import Reservations from "@/components/Reservations";
 
 const Index = () => {
@@ -36,7 +35,7 @@ const Index = () => {
       </main>
 
       {/* Floating Call-to-Action Button */}
-      <FloatingCTA />
+      {/* <FloatingCTA /> */}
 
       {/* Footer */}
       <footer className="bg-coffee-rich text-cream py-12">
@@ -44,13 +43,10 @@ const Index = () => {
           <div className="grid md:grid-cols-4 gap-8">
             {/* Brand */}
             <div className="md:col-span-2">
-              <h3 className="text-2xl font-display font-bold mb-4">
-                Aroma Cafe
-              </h3>
+              <h3 className="text-2xl font-display font-bold mb-4">Aroma Cafe</h3>
               <p className="text-cream/80 mb-6 max-w-md">
-                Where exceptional coffee meets warm hospitality. Join us for a
-                perfect blend of artisanal beverages, cozy atmosphere, and
-                community connection.
+                Where exceptional coffee meets warm hospitality. Join us for a perfect blend of artisanal
+                beverages, cozy atmosphere, and community connection.
               </p>
               <div className="flex gap-4">
                 <div className="w-8 h-8 bg-cream/20 rounded-full flex items-center justify-center hover:bg-cream/30 transition-colors cursor-pointer">
@@ -70,34 +66,22 @@ const Index = () => {
               <h4 className="font-semibold mb-4">Quick Links</h4>
               <ul className="space-y-2 text-cream/80">
                 <li>
-                  <a
-                    href="#menu"
-                    className="hover:text-cream transition-colors"
-                  >
+                  <a href="#menu" className="hover:text-cream transition-colors">
                     Menu
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="#about"
-                    className="hover:text-cream transition-colors"
-                  >
+                  <a href="#about" className="hover:text-cream transition-colors">
                     About Us
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="#gallery"
-                    className="hover:text-cream transition-colors"
-                  >
+                  <a href="#gallery" className="hover:text-cream transition-colors">
                     Gallery
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="#reservations"
-                    className="hover:text-cream transition-colors"
-                  >
+                  <a href="#reservations" className="hover:text-cream transition-colors">
                     Reservation
                   </a>
                 </li>

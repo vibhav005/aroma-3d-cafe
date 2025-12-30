@@ -102,7 +102,7 @@ const BurgerCard: React.FC<{ item: MenuItem }> = ({ item }) => {
 
         {/* CTA row */}
         <div className="mt-5 flex items-center justify-center gap-3">
-          <motion.button
+          {/* <motion.button
             whileTap={{ scale: 0.98 }}
             onClick={handleAdd}
             className="
@@ -114,7 +114,7 @@ const BurgerCard: React.FC<{ item: MenuItem }> = ({ item }) => {
             "
           >
             Add to Order
-          </motion.button>
+          </motion.button> */}
 
           <div
             className="

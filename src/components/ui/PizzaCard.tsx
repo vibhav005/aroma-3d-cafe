@@ -1,6 +1,5 @@
 // src/features/menu/ui/PizzaCard.tsx
 import { motion } from "framer-motion";
-import { Plus } from "lucide-react";
 import React from "react";
 
 import type { MenuItem } from "@/features/menu/menuTypes";
@@ -120,7 +119,7 @@ const PizzaCard: React.FC<{ item: MenuItem }> = ({ item }) => {
           </div>
 
           {/* Add button */}
-          <motion.button
+          {/* <motion.button
             whileTap={{ scale: 0.98 }}
             onClick={handleAdd}
             className="
@@ -131,7 +130,7 @@ const PizzaCard: React.FC<{ item: MenuItem }> = ({ item }) => {
           >
             <Plus className="h-4 w-4" />
             Add
-          </motion.button>
+          </motion.button> */}
         </div>
       </div>
     </motion.div>

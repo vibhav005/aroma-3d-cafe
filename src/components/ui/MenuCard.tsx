@@ -208,12 +208,12 @@ const MenuCard: React.FC<{ item: MenuItem }> = ({ item }) => {
             </span>
           </div>
 
-          <button
+          {/* <button
             onClick={handleAddToCart}
             className="bg-coffee-medium hover:bg-coffee-rich text-cream px-4 py-2 rounded-full transition"
           >
             Add to Order
-          </button>
+          </button> */}
         </div>
       </CardContent>
     </Card>

@@ -1,7 +1,7 @@
 import type { MenuItem } from "@/features/menu/menuTypes";
 import { addToCart } from "@/lib/cartBus";
 import { motion } from "framer-motion";
-import { Plus, Star } from "lucide-react";
+import { Star } from "lucide-react";
 import React from "react";
 
 const priceToNumber = (p: string) => {
@@ -100,7 +100,7 @@ const AppetizerCard: React.FC<{ item: MenuItem }> = ({ item }) => {
             ₹ {price}
           </div>
 
-          <motion.button
+          {/* <motion.button
             whileTap={{ scale: 0.98 }}
             onClick={handleAdd}
             className="
@@ -113,7 +113,7 @@ const AppetizerCard: React.FC<{ item: MenuItem }> = ({ item }) => {
           >
             <Plus className="h-4 w-4" />
             Add
-          </motion.button>
+          </motion.button> */}
         </div>
       </div>
     </motion.div>

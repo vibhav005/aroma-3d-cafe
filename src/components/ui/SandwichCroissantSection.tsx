@@ -1,5 +1,4 @@
 import type { MenuItem } from "@/features/menu/menuTypes";
-import { addToCart } from "@/lib/cartBus";
 import { motion } from "framer-motion";
 import React from "react";
 
@@ -45,7 +44,7 @@ const ListRow: React.FC<{ item: MenuItem; index: number }> = ({ item, index }) =
       <div className="shrink-0 flex items-center gap-3">
         <p className="text-lg font-bold text-coffee-rich">₹{priceToNumber(item.price)}</p>
 
-        <motion.button
+        {/* <motion.button
           whileTap={{ scale: 0.98 }}
           whileHover={{ y: -1 }}
           onClick={() =>
@@ -59,7 +58,7 @@ const ListRow: React.FC<{ item: MenuItem; index: number }> = ({ item, index }) =
           className="px-4 py-2 rounded-full bg-coffee-medium text-cream font-semibold hover:bg-coffee-rich transition shadow-sm"
         >
           Add
-        </motion.button>
+        </motion.button> */}
       </div>
     </div>
   </motion.div>
