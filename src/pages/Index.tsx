@@ -4,6 +4,7 @@ import HeroSection from "@/components/HeroSection";
 import MenuSection from "@/components/MenuSection";
 import Navigation from "@/components/Navigation";
 import Reservations from "@/components/Reservations";
+import Reviews from "@/components/Reviews";
 
 const Index = () => {
   return (
@@ -29,6 +30,8 @@ const Index = () => {
         <GallerySection />
 
         <Reservations />
+
+        <Reviews />
 
         {/* Contact & Reservations Section */}
         {/* <ContactSection /> */}
