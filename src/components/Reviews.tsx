@@ -109,7 +109,7 @@ export default function Reviews() {
                   </div>
 
                   <p className="mt-4 text-center text-sm text-coffee-medium/90">
-                    Mention the coffee, the vibe, or the staff — whatever felt best.
+                    Mention the coffee, the vibe, or the staff whatever felt best.
                   </p>
                 </motion.div>
               </div>
@@ -173,7 +173,7 @@ export default function Reviews() {
           </Card>
 
           <p className="mt-6 text-center text-sm text-coffee-medium/90">
-            Next time you’re around, drop in — we’ll brew something special.
+            Next time you’re around, drop in we’ll brew something special.
           </p>
         </motion.div>
       </div>
